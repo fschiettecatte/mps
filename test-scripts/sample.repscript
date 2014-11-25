@@ -1,0 +1,115 @@
+#*****************************************************************************
+#       Copyright (C) 1993-2011, FS Consulting LLC. All rights reserved      *
+#                                                                            *
+#  This notice is intended as a precaution against inadvertent publication   *
+#  and does not constitute an admission or acknowledgement that publication  *
+#  has occurred or constitute a waiver of confidentiality.                   *
+#                                                                            *
+#  This software is the proprietary and confidential property                *
+#  of FS Consulting LLC.                                                     *
+#*****************************************************************************
+
+
+#
+# Sample Repository script
+#
+
+
+openRep /var/lib/mps/index/jfif/repos
+
+#getObject              1455
+#printObject            1455
+printObjectHex          1455
+#printObjectByte        1455
+printObjectBin      1455
+
+exit
+
+
+
+# Delete the repository, make a clean start
+deleteRep       /local/index/test
+
+# Create the repository and open it up for updates
+createRep       /local/index/test
+updateRep       /local/index/test
+
+
+# Initialize a new transaction
+initTransaction
+
+
+# Store a number of objects
+storeObject     500         a
+storeObject     5000        b
+storeObject     10000       c
+storeObject     20000       d
+storeObject     30000       e
+
+# Delete object ID 5, which should be the last one we added above
+deleteObject    5
+
+
+# Commit the transaction
+commitTransaction
+
+# Verify the repository
+verify
+
+# List the repository
+listRepository
+
+# Close the repository
+closeRep
+
+
+# Open the repository, get the object ID 1 and close it
+openRep         /local/index/test
+getObject       1
+closeRep
+
+
+
+# Check the integrity of the repository
+checkRep        /local/index/test
+
+# Open the repository for updates
+updateRep       /local/index/test
+
+# Get a number of objects by ID, these were added above in the first transactions
+getObject       1
+getObject       2
+getObject       3
+
+# Initialize a new transaction
+initTransaction
+
+# Update a number of objects and get them to check that the updates are going through
+getObject       3
+updateObject    3   100     5
+getObject       3
+getObject       4
+updateObject    4   1000    6
+getObject       4
+
+# Commit the transaction
+commitTransaction
+
+# Verify the repository
+verify
+
+# List the repository
+listRepository
+
+# Close the repository
+closeRep
+
+
+# Check the integrity of the repository
+checkRep        /local/index/test
+
+
+exit
+
+
+

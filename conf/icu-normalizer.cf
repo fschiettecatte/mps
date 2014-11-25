@@ -1,0 +1,57 @@
+#*****************************************************************************
+#       Copyright (C) 1993-2011, FS Consulting LLC. All rights reserved      *
+#                                                                            *
+#  This notice is intended as a precaution against inadvertent publication   *
+#  and does not constitute an admission or acknowledgement that publication  *
+#  has occurred or constitute a waiver of confidentiality.                   *
+#                                                                            *
+#  This software is the proprietary and confidential property                *
+#  of FS Consulting LLC.                                                     *
+#*****************************************************************************
+
+
+#--------------------------------------------------------------------------
+#
+# Configuration file for the ICU Normalizer module
+#
+# The format of this file is described at:
+#
+#   http://userguide.icu-project.org/
+#   http://userguide.icu-project.org/transforms/general/rules
+#
+
+
+#--------------------------------------------------------------------------
+
+
+# Variables
+$single_quote           = \u0027;
+$double_quote           = \u0022;
+$underscore             = \u005F;
+$hyphen                 = \u002D;
+$left_parenthesis       = \u0028;
+$right_parenthesis      = \u0029;
+$left_square_bracket    = \u005B;
+$right_square_bracket   = \u005D;
+$left_curly_bracket     = \u007B;
+$right_curly_bracket    = \u007D;
+
+
+# MPS Normalization
+\p{Pc} > $underscore;                               # normalization of the PUNCTUATION CONNECTOR Category
+\p{Pd} > $hyphen;                                   # normalization of the PUNCTUATION DASH Category
+\uFF3B > $left_square_bracket;                      # normalization of the FULLWIDTH LEFT SQUARE BRACKET
+\uFF5B > $left_curly_bracket;                       # normalization of the FULLWIDTH LEFT CURLY BRACKET
+[\p{Ps} - [\u005B\u007B]] > $left_parenthesis;      # normalization of the PUNCTUATION OPEN Category
+\uFF3D > $right_square_bracket;                     # normalization of the FULLWIDTH RIGHT SQUARE BRACKET
+\uFF5D > $right_curly_bracket;                      # normalization of the FULLWIDTH RIGHT CURLY BRACKET
+[\p{Pe} - [\u005D\u007D]] > $right_parenthesis;     # normalization of the PUNCTUATION CLOSE Category
+\p{Pf} > $single_quote;                             # normalization of the PUNCTUATION FINAL QUOTE Category
+\p{Pi} > $single_quote;                             # normalization of the PUNCTUATION INITIAL QUOTE Category
+# \p{Po} >                                          # normalization of the PUNCTUATION OTHER Category
+
+
+# Finally apply NFKC Normalization (Compatibility Decomposition followed by Canonical Composition)
+::NFKC;
+
+

@@ -1,0 +1,25 @@
+#*****************************************************************************
+#       Copyright (C) 1993-2011, FS Consulting Inc. All rights reserved      *
+#                                                                            *
+#  This notice is intended as a precaution against inadvertent publication   *
+#  and does not constitute an admission or acknowledgement that publication  *
+#  has occurred or constitute a waiver of confidentiality.                   *
+#                                                                            *
+#  This software is the proprietary and confidential property                *
+#  of FS Consulting, Inc.                                                    *
+#*****************************************************************************
+
+
+Contents for ./src/spi
+----------------------
+
+This directory contains all the various source code files which 
+make up the MPS Server software SPI interface.
+
+
+spi.h
+    - The SPI interface header file. 
+
+spi.c
+    - The SPI interface support functions file. 
+

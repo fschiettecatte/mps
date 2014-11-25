@@ -1,0 +1,435 @@
+#*****************************************************************************
+#       Copyright (C) 1993-2011, FS Consulting LLC. All rights reserved      *
+#                                                                            *
+#  This notice is intended as a precaution against inadvertent publication   *
+#  and does not constitute an admission or acknowledgement that publication  *
+#  has occurred or constitute a waiver of confidentiality.                   *
+#                                                                            *
+#  This software is the proprietary and confidential property                *
+#  of FS Consulting LLC.                                                     *
+#*****************************************************************************
+
+
+#--------------------------------------------------------------------------
+#
+# MPS Search Configuration File.
+#
+
+
+#--------------------------------------------------------------------------
+#
+# Author: Francois Schiettecatte (FS Consulting)
+# Creation Date: July 1996
+#
+
+
+#--------------------------------------------------------------------------
+#
+# Description:
+#
+# This file must be located in the configuration directory.
+#
+# It allows the setting of various search engine configuration 
+# options as follows:
+#
+#   - version
+#       - version
+#
+#   - index configuration
+#       - virtual index
+#       - virtual index open error
+#       - virtual index sort orders
+#
+#   - parser configuration
+#       - parser sort
+#       - parser boolean operator
+#       - parser boolean operation
+#       - parser operator case
+#       - parser term case
+#       - parser search type
+#       - parser frequent terms
+#
+#   - search configuration
+#       - search maximum documents returned
+#       - search term weight
+#       - search feedback term weight
+#       - search frequent term coverage threshold
+#       - search feedback minimum term count
+#       - search feedback maximum term percentage
+#       - search feedback maximum term coverage threshold
+#
+#   - search report configuration
+#       - search report location
+#       - search report subdirectory mask
+#
+#   - search cache configuration
+#       - search cache location
+#       - search cache subdirectory mask
+#       - search cache mode
+#
+#   - filter files configuration
+#       - filter files location
+#
+
+
+#--------------------------------------------------------------------------
+#
+# Version
+#
+
+#
+# Version
+#
+# The version number of the configuration file. It needs to be the same
+# as the software version.
+#
+version=11.0.0
+
+
+
+#--------------------------------------------------------------------------
+#
+# Index Configuration
+#
+
+#
+# Virtual index
+#
+# A comma delimited list of the various physical indices which make up
+# each virtual index served up by the server. The index name can be
+# an actual name or a regex if enclosed in braces [^posts-[0-9][0-9][0-9][0-9]$].
+#
+virtual-index:source=[^source-[0-9][0-9][0-9][0-9][0-9]$]
+virtual-index:item=[^item-[0-9][0-9][0-9][0-9][0-9]$]
+virtual-index:enclosure=[^enclosure-[0-9][0-9][0-9][0-9][0-9]$]
+virtual-index:channel=[^channel-[0-9][0-9][0-9][0-9][0-9]$]
+virtual-index:user=[^user-[0-9][0-9][0-9][0-9][0-9]$]
+
+virtual-index:source-segment-000=[^source-[0-9][0-9][0-9][0-9][0-9]$]
+virtual-index:item-segment-000=[^item-[0-9][0-9][0-9][0-9][0-9]$]
+virtual-index:enclosure-segment-000=[^enclosure-[0-9][0-9][0-9][0-9][0-9]$]
+virtual-index:channel-segment-000=[^channel-[0-9][0-9][0-9][0-9][0-9]$]
+virtual-index:user-segment-000=[^user-[0-9][0-9][0-9][0-9][0-9]$]
+
+
+#
+# Virtual index open error
+#
+# This sets the virtual index open error policy.  
+# It can be any of the following: 
+#
+#       ignore
+#       fail
+#
+# Default=fail
+#
+virtual-index-open-error:source=ignore
+virtual-index-open-error:item=ignore
+virtual-index-open-error:enclosure=ignore
+virtual-index-open-error:channel=ignore
+virtual-index-open-error:user=ignore
+
+virtual-index-open-error:source-segment-000=ignore
+virtual-index-open-error:item-segment-000=ignore
+virtual-index-open-error:enclosure-segment-000=ignore
+virtual-index-open-error:channel-segment-000=ignore
+virtual-index-open-error:user-segment-000=ignore
+
+
+#
+# Virtual index sort orders
+#
+# This sets the virtual index sort orders, expressed as a search sort order.
+#
+virtual-index-sort-orders:source={sort:date:desc}
+virtual-index-sort-orders:item={sort:date:desc}
+virtual-index-sort-orders:enclosure={sort:date:desc}
+virtual-index-sort-orders:channel={sort:date:desc}
+virtual-index-sort-orders:user={sort:date:desc}
+
+virtual-index-sort-orders:source-segment-000={sort:date:desc}
+virtual-index-sort-orders:item-segment-000={sort:date:desc}
+virtual-index-sort-orders:enclosure-segment-000={sort:date:desc}
+virtual-index-sort-orders:channel-segment-000={sort:date:desc}
+virtual-index-sort-orders:user-segment-000={sort:date:desc}
+
+
+
+#--------------------------------------------------------------------------
+#
+# Parser Configuration
+#
+
+#
+# Parser sort
+#
+# This sets the default parser sort.
+#
+# No defaults
+#
+parser-sort={sort:relevance:desc}
+
+
+#
+# Parser boolean operator
+#
+# This sets the default parser boolean operator.
+# It can be any of the following: 
+#
+#       {boolean_operator:or}
+#       {boolean_operator:ior}
+#       {boolean_operator:xor}
+#       {boolean_operator:and}
+#       {boolean_operator:near}
+#       {boolean_operator:adj}
+#
+# Default={boolean_operator:and}
+#
+parser-boolean-operator={boolean_operator:and}
+
+
+#
+# Parser boolean operations
+#
+# This sets the default boolean operation.
+# It can be any of the following: 
+#
+#       {boolean_operation:strict}
+#       {boolean_operation:relaxed}
+#
+# Default={boolean_operation:strict}
+#
+parser-boolean-operation={boolean_operation:strict}
+
+
+#
+# Parser operator case
+#
+# This sets the default operator case.
+# It can be any of the following: 
+#
+#       {operator_case:any}
+#       {operator_case:upper}
+#       {operator_case:lower}
+#
+# Default={operator_case:any}
+#
+parser-operator-case={operator_case:any}
+
+
+#
+# Parser term case
+#
+# This sets the default term case.
+# It can be any of the following: 
+#
+#       {term_case:drop}
+#       {term_case:keep}
+#
+# Default={term_case:keep}
+#
+parser-term-case={term_case:keep}
+
+
+#
+# Parser search type
+#
+# This sets the default search type. 
+# It can be any of the following: 
+#
+#       {search_type:boolean}
+#       {search_type:freetext}
+#
+# Default={search_type:boolean}
+#
+parser-search-type={search_type:boolean}
+
+
+#
+# Parser frequent terms
+#
+# This sets the default frequent terms.
+# It can be any of the following: 
+#
+#       {frequent_terms:drop}
+#       {frequent_terms:keep}
+#
+# (See search-frequent-term-coverage-threshold)
+#
+# Default={frequent_terms:keep}
+#
+parser-frequent-terms={frequent_terms:keep}
+
+
+
+#--------------------------------------------------------------------------
+#
+# Search Configuration
+#
+# Note that changing any of these settings (except for 
+# search-maximum-documents-returned) will invalidate
+# the search cache.
+#
+
+#
+# Search maximum documents returned
+#
+# This sets the maximum number of documents returned as result of a search.
+# Leave undefined for no maximum.
+#
+#search-maximum-documents-returned=100
+
+
+#
+# Search term weight
+#
+# This sets the search term weight.
+#
+# Default=1.0
+#
+search-term-weight=1.0
+
+
+#
+# Search feedback term weight
+#
+# This sets the search feedback term weight.
+#
+# Default=0.1
+#
+search-feedback-term-weight=0.1
+
+
+#
+# Search frequent term coverage threshold
+#
+# This sets, as a percentage, the threshold coverage at which a term 
+# is assumed to be frequent (ie turned into a stop word).
+# (See parser-frequent-terms.)
+#
+# Leave undefined for no threshold.
+#
+search-frequent-term-coverage-threshold=100
+
+
+#
+# Search feedback minimum term count
+#
+# This sets the minimum number of terms to extract from feedback text.
+#
+# Default=10
+#
+search-feedback-minimum-term-count=10
+
+
+#
+# Search feedback maximum term percentage
+#
+# This sets, as a percentage, the maximum number of terms to extract 
+# from feedback text.
+#
+# Default=25
+#
+search-feedback-maximum-term-percentage=25
+
+
+#
+# Search feedback maximum term coverage threshold
+#
+# This sets, as a percentage, the maximum coverage threshold for terms
+# extracted from feedback text.
+#
+# Default=8
+#
+search-feedback-maximum-term-coverage-threshold=8
+
+
+
+#--------------------------------------------------------------------------
+#
+# Search Report Configuration
+#
+
+#
+# Search report location
+#
+# This tells the server to create the search reports in 
+# the specified location.
+#
+search-report-location=memory
+#search-report-location=file:///var/lib/mps/report
+#search-report-location=/var/lib/mps/report
+
+
+#
+# Search report subdirectory mask
+#
+# This tells the server in which subdirectory the report file will
+# be located. The digits 0-9 will be replaced by the character located
+# in that offset in the report file name (which is a SHA1 key).
+#
+# Default=null
+#
+search-report-subdirectory-mask=01/23/
+
+
+
+#--------------------------------------------------------------------------
+#
+# Search Cache Configuration
+#
+
+#
+# Search cache location
+#
+# This tells the server to create the search cache files in 
+# the specified location.
+#
+search-cache-location=file:///home/poplar/cache
+#search-cache-location=file:///var/lib/mps/cache
+#search-cache-location=/var/lib/mps/cache
+
+
+#
+# Search cache subdirectory mask
+#
+# This tells the server in which subdirectory the cache file will
+# be located. The '{Index}' symbol will be replaced by the index 
+# name, the '{LastUpdateTime}' will be replaced by the last update
+# time of the index, and the digits 0-9 will be replaced by the 
+# character located in that offset in the cache file name (which 
+# is a SHA1 key).
+#
+# Default=null
+#
+search-cache-subdirectory-mask={Index}/{LastUpdateTime}/01/23/
+
+
+#
+# Search cache mode
+#
+# This tells the server how to set the cache mode, possible
+# values are 'off', 'read-only' and 'read-write'.
+#
+# Default depends on the cache location access permissions.
+#
+search-cache-mode=read-write
+#search-cache-mode=off
+#search-cache-mode=read-only
+#search-cache-mode=read-write
+
+
+
+#--------------------------------------------------------------------------
+#
+# Filter Files Configuration
+#
+
+#
+# Filter files location
+#
+# This tells the server where to find the filter files.
+#
+#filter-files-location=file:///home/poplar/conf/filter-files
+#filter-files-location=/var/lib/mps/conf/filter-files
+

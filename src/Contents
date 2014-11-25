@@ -1,0 +1,53 @@
+#*****************************************************************************
+#       Copyright (C) 1993-2011, FS Consulting Inc. All rights reserved      *
+#                                                                            *
+#  This notice is intended as a precaution against inadvertent publication   *
+#  and does not constitute an admission or acknowledgement that publication  *
+#  has occurred or constitute a waiver of confidentiality.                   *
+#                                                                            *
+#  This software is the proprietary and confidential property                *
+#  of FS Consulting, Inc.                                                    *
+#*****************************************************************************
+
+
+Contents for ./src
+------------------
+
+This directory contains all the various source code files which 
+make up the MPS Server software suite.
+
+
+utils
+    - Contains all the utility functions. 
+
+language
+    - Contains all the language functions.
+
+protocols
+    - Contains all the protocols functions.
+
+spi
+    - Contains the SPI interface and functions. 
+
+report
+    - Contains the search report processing functions. 
+
+parsers
+    - Contains the parser application and parsers.
+
+gateway
+    - Contains the mps gateway. 
+
+search
+    - Contains the search engine functions. 
+
+server
+    - Contains the mps server and the protocol handlers. 
+
+misc
+    - Contains any utility applications which do not fall into
+      the other directories, such as the defazio benchmark driver,
+      the database verificator and the machine environment dumper.
+
+clients
+    - Contains all client applications. 

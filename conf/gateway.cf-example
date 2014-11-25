@@ -1,0 +1,514 @@
+#*****************************************************************************
+#       Copyright (C) 1993-2011, FS Consulting Inc. All rights reserved      *
+#                                                                            *
+#  This notice is intended as a precaution against inadvertent publication   *
+#  and does not constitute an admission or acknowledgement that publication  *
+#  has occurred or constitute a waiver of confidentiality.                   *
+#                                                                            *
+#  This software is the proprietary and confidential property                *
+#  of FS Consulting, Inc.                                                    *
+#*****************************************************************************
+
+
+#--------------------------------------------------------------------------
+#
+# MPS Gateway Configuration File.
+#
+
+
+#--------------------------------------------------------------------------
+#
+# Author: Francois Schiettecatte (FS Consulting, Inc.)
+# Creation Date: July 1996
+#
+
+
+#--------------------------------------------------------------------------
+#
+# Description:
+#
+# This file must be located in the gateway configuration directory
+# in order to be consulted.
+#
+# It contains symbols which allows the gateway adminstrator to configure
+# various aspects of the gateway such as:
+#
+#   - version
+#       - version
+#
+#   - gateway information
+#       - gateway description
+#       - gateway administrator name
+#       - gateway administrator email
+#       - gateway ranking algorithm
+#       - gateway connection timeout
+#       - gateway search timeout
+#       - gateway retrieval timeout
+#       - gateway information timeout
+#       - gateway replica affinity
+#       - gateway information cache timeout
+#       - gateway allow search overrides
+#
+#   - protocol configuration
+#       - gateway network protocol
+#       - gateway send init
+#
+#   - index configuration
+#       - index hosts (autodiscovery)
+#       - index hosts (autodiscovery, specific indices)
+#       - index (autodiscovery)
+#       - index location (fixed location, specific indices)
+#       - index sort orders
+#       - index maximum segments searched
+#       - index minimum segments searched
+#       - index connection error
+#       - index search error
+#       - index retrieval error
+#
+#   - index information
+#       - index description
+#       - index language name
+#       - index tokenizer name
+#       - index stemmer name
+#       - index stop list name
+#
+#   - index field information
+#       - index field names
+#       - index field description
+#       - index field type
+#
+
+
+
+#--------------------------------------------------------------------------
+#
+# Version
+#
+
+#
+# Version
+#
+# The version number of the configuration file. It needs to be the same
+# as the software version.
+#
+version=11.0.0
+
+
+
+#--------------------------------------------------------------------------
+#
+# Gateway Information
+#
+
+#
+# Gateway description
+#
+# The description of this gateway.
+#
+gateway-description=
+
+
+#
+# Gateway administrator name
+#
+# The name of this gateway's administrator.
+#
+gateway-admin-name=
+
+
+#
+# Gateway administrator email
+#
+# The email address of this gateway's administrator.
+#
+gateway-admin-email=
+
+
+#
+# Gateway ranking algorithm
+#
+# The gateway ranking algorithm.
+#
+gateway-ranking-algorithm=fsclt1
+
+
+#
+# Gateway connection timeout
+#
+# This sets the default gateway connection timeout in milliseconds.
+#
+# Default=10
+#
+gateway-connection-timeout=10
+
+
+#
+# Gateway search timeout
+#
+# This sets the default gateway search timeout in milliseconds.
+#
+# Default=60000
+#
+gateway-search-timeout=60000
+
+
+#
+# Gateway retrieval timeout
+#
+# This sets the default gateway search retrieval in milliseconds.
+#
+# Default=5000
+#
+gateway-retrieval-timeout=5000
+
+
+#
+# Gateway information timeout
+#
+# This sets the default gateway information timeout in milliseconds.
+#
+# Default=5000
+#
+gateway-information-timeout=5000
+
+
+#
+# Gateway replica affinity
+#
+# This sets the default gateway replica affinity, set to -1 
+# to ignore.
+#
+# Default=-1
+#
+#gateway-replica-affinity=-1
+
+
+#
+# Gateway information cache timeout
+#
+# This sets the gateway information cache timeout in seconds, set 
+# to 0 means for no timeout (cache lives for the duration of 
+# the gateway server process)
+#
+# Default=600
+#
+gateway-information-cache-timeout=600
+
+
+#
+# Gateway allow search overrides
+#
+# This sets whether a search can override the following gateway 
+# configuration values:
+#
+#   gateway-connection-timeout
+#   gateway-search-timeout
+#   gateway-retrieval-timeout
+#   gateway-information-timeout
+#   index-maximum-segments-searched
+#   index-minimum-segments-searched
+#
+# It can be any of the following: 
+#
+#       yes
+#       no
+#
+# Default=no
+#
+gateway-allow-search-overrides=no
+
+
+
+
+#--------------------------------------------------------------------------
+#
+# Protocol Configuration
+#
+
+#
+# Gateway network protocol
+#
+# This sets the network protocol to be used for a particular 
+# communication protocol.
+#
+# The communication protocols are as follows: 
+#
+#   lwps
+#
+# No Default
+#
+# The network protocols are as follows: 
+#
+#   tcp
+#   udp
+#
+# Default=tcp
+#
+gateway-network-protocol:lwps=tcp
+
+
+#
+# Gateway send init
+#
+# This sets whether an initialization will be send with 
+# each connection to the search engines.
+#
+# The communication protocols are as follows: 
+#
+#   lwps
+#
+# No Default
+#
+# The settings are as follows: 
+#
+#       yes
+#       no
+#
+# Default=no
+#
+gateway-send-init:lwps=no
+
+
+
+
+#--------------------------------------------------------------------------
+#
+# Index Configuration
+#
+
+#
+# Index hosts (autodiscovery)
+#
+# A comma delimited list of the host ranges to scan when searching for 
+# auto-discoverable indices. The formats of each entry are as follows:
+#
+#   IP address/Bit mask:Port
+#   IP address/Bit mask
+#   IP address:Port
+#   IP address
+#
+#index-hosts=10.0.1.0/24:9001
+
+
+#
+# Index hosts (autodiscovery, specific indices)
+#
+# A comma delimited list of the host ranges to scan when searching for 
+# specific segments for an auto-discoverable index. The formats of each 
+# entry are as follows:
+#
+#   IP address/Bit mask:Port
+#   IP address/Bit mask
+#   IP address:Port
+#   IP address
+#
+index-hosts:test1=10.0.1.0/24:9001,10.0.1.0/24:9002
+index-hosts:test2=10.0.1.0/24:9001
+index-hosts:test3=10.0.1.0/24:9001
+index-hosts:test4=10.0.1.0/24:9001
+index-hosts:test5=10.0.1.0/24:9001
+index-hosts:feeds=10.0.1.0/24:9001
+index-hosts:posts=10.0.1.0/24:9001
+
+
+#
+# Index (autodiscovery, specific indices)
+#
+# A comma delimited list of the various indices segments which 
+# make up each auto-discoverable index served up by the server. 
+# The segment name can be an actual name, or a regex if enclosed 
+# in braces as follows: [^posts-[0-9][0-9][0-9][0-9]$].
+# 
+index:test1=jfif
+index:test2=hci-bib
+index:test3=omim
+index:test4=medline
+index:test5=jfif, hci-bib, omim, medline
+#index:feeds=feeds
+#index:posts=posts-0000
+#index:posts=[^posts-segment-[0-9][0-9][0-9]$]
+
+
+#
+# Index location (fixed location, specific indices)
+#
+# A comma delimited list of the various indices segments which make up
+# each index served up by the gateway. The format of each entry is as 
+# follows:
+#
+#       lwps://hostName:port/indexName
+#       lwps://hostName1:port/indexName1,lwps://hostName2:port/indexName2 (segments)
+#       lwps://hostName1:port/indexName1|lwps://hostName2:port/indexName1 (replicant)
+#
+index-location:test=lwps://linux.fsconsult.com:9001/jfif,lwps://linux.fsconsult.com:9001/hci-bib,lwps://linux.fsconsult.com:9001/omim,lwps://linux.fsconsult.com:9001/medline
+
+
+#
+# Index sort orders
+#
+# The index sort orders, expressed as a search sort order.
+#
+#index-sort-orders:vlc2={sort:date:desc}
+
+
+#
+# Index maximum segments searched
+#
+# This sets the index maximum segments searched for any given search. 
+# This is only meaningful when used with the index sort orders.
+#
+# Default=0
+#
+#index-maximum-segments-searched:vlc2=0
+
+
+#
+# Index minimum segments search count
+#
+# This sets the index minimum segments searched for any given search. 
+# This is only meaningful when used with the index sort orders.
+#
+# Default=0
+#
+#index-minimum-segments-searched:vlc2=0
+
+
+#
+# Index connection policy
+#
+# This sets the index connection policy.
+# It can be any of the following: 
+#
+#       lazy
+#       strict
+#
+# Default=strict
+#
+index-connection-policy:vlc2=lazy
+
+
+#
+# Index connection error
+#
+# This sets the index connection error policy.
+# It can be any of the following: 
+#
+#       ignore
+#       fail
+#
+# Default=fail
+#
+index-connection-error:vlc2=fail
+
+
+#
+# Index search error
+#
+# This sets the index search error policy.
+# It can be any of the following: 
+#
+#       ignore
+#       fail
+#
+# Default=fail
+#
+index-search-error:vlc2=fail
+
+
+#
+# Index retrieval error
+#
+# This sets the index retrieval error policy.
+# It can be any of the following: 
+#
+#       ignore
+#       fail
+#
+# Default=fail
+#
+index-retrieval-error:vlc2=fail
+
+
+
+
+#--------------------------------------------------------------------------
+#
+# Index Information
+#
+
+
+#
+# Index description
+#
+# The description of each index listed above.
+#
+index-description:vlc2=VLC 2 index
+
+
+#
+# Index language name
+#
+# The language name of each index listed above.
+#
+index-language-name:vlc2=en
+
+
+#
+# Index tokenizer name
+#
+# The tokenizer name of each index listed above.
+#
+index-tokenizer-name:vlc2=fsclt-4
+
+
+#
+# Index stemmer name
+#
+# The stemmer name of each index listed above.
+#
+index-stemmer-name:vlc2=plural
+
+
+#
+# Index stop list name
+#
+# The stop list name of each index listed above.
+#
+index-stop-list-name:vlc2=google-modified
+
+
+
+
+#--------------------------------------------------------------------------
+#
+# Index Field Information
+#
+
+#
+# Index field names
+#
+# A comma delimited list of the fields in this index
+#
+index-field-names:vlc2=title, date, abstract
+
+
+#
+# Index field description
+#
+# A description of each fields in this index
+#
+index-field-description:vlc2:title=Title
+index-field-description:vlc2:date=Date
+index-field-description:vlc2:abstract=Abstract
+
+
+#
+# Index field type
+#
+# The type of each field in this index, values being 'unknown',
+# 'number', 'text' or 'date', defaults to 'unknown'
+#
+index-field-type:vlc2:title=text
+index-field-type:vlc2:date=date
+index-field-type:vlc2:abstract=text
+

@@ -1,0 +1,44 @@
+#*****************************************************************************
+#       Copyright (C) 1993-2011, FS Consulting Inc. All rights reserved      *
+#                                                                            *
+#  This notice is intended as a precaution against inadvertent publication   *
+#  and does not constitute an admission or acknowledgement that publication  *
+#  has occurred or constitute a waiver of confidentiality.                   *
+#                                                                            *
+#  This software is the proprietary and confidential property                *
+#  of FS Consulting, Inc.                                                    *
+#*****************************************************************************
+
+
+Contents for ./scripts
+----------------------
+
+This directory contains the various support scripts for the MPS server.
+
+
+mpsserver.sh
+    - /etc/init.d start/stop script for the mpsserver
+
+mpsgateway.sh
+    - /etc/init.d start/stop script for the mpsgateway
+
+MpsLogReport.pl
+    - Extract reports from an mpsserver/mpsgateway log.
+
+MpsLogRollover.sh
+    - Rolls over the mpsserver/mpsgateway log and 
+      then runs MpsLogReport.pl on the rolled over log.
+
+MpsFileExpirer.pl
+    - Delete old search cache and search report files.
+
+CreateScriptFromLog.pl
+    - Generates an spi or lwps script file from an 
+      mpsserver/mpsgateway log.
+
+UpdateOmim.pl
+    - Download and index the omim index.
+
+UpdateHciBib.pl
+    - Download and index the hci-bib index.
+

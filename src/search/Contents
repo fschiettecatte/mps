@@ -1,0 +1,66 @@
+#*****************************************************************************
+#       Copyright (C) 1993-2011, FS Consulting Inc. All rights reserved      *
+#                                                                            *
+#  This notice is intended as a precaution against inadvertent publication   *
+#  and does not constitute an admission or acknowledgement that publication  *
+#  has occurred or constitute a waiver of confidentiality.                   *
+#                                                                            *
+#  This software is the proprietary and confidential property                *
+#  of FS Consulting, Inc.                                                    *
+#*****************************************************************************
+
+
+Contents for ./src/search
+-------------------------
+
+This directory contains all the various source code files which 
+make up the search engine.
+
+
+bitmap.c/h
+cache.c/h
+config.h
+index.c/h
+document.c/h
+feedback.c/h
+filepaths.c/h
+filter.c/h
+indexer.c/h
+info.c/h
+invert.c/h
+keydict.c/h
+language.c/h
+parser.c/h
+report.c/h
+posting.c/h
+retrieval.c/h
+search.c/h
+shorthit.c/h
+srch_err.h
+srch.h
+stemmer.c/h
+stoplist.c/h
+termdict.c/h
+termlen.c/h
+termsrch.c/h
+version.c/h
+weight.c/h
+    - Search engine library.
+
+
+
+mpsindexer.c
+    - MPS indexer application.
+
+mpsdelete.c
+    - MPS document deleter application.
+
+mpsloader.c
+    - MPS shared memory loader application.
+
+mpsphrases.c
+    - MPS phrases extraction application.
+
+mpsterms.c
+    - MPS terms extraction application.
+

@@ -1,0 +1,39 @@
+#*****************************************************************************
+#       Copyright (C) 1993-2011, FS Consulting Inc. All rights reserved      *
+#                                                                            *
+#  This notice is intended as a precaution against inadvertent publication   *
+#  and does not constitute an admission or acknowledgement that publication  *
+#  has occurred or constitute a waiver of confidentiality.                   *
+#                                                                            *
+#  This software is the proprietary and confidential property                *
+#  of FS Consulting, Inc.                                                    *
+#*****************************************************************************
+
+
+Contents for ./conf
+-------------------
+
+
+This directory contains all the configuration files for the MPS Server
+system.
+
+search.cf
+    - search configuration file for mpsserver
+
+gateway.cf
+    - gateway configuration file for mpsgateway & mps php module
+
+icu-normalizer.cf
+    - icu normalizer configuration file
+
+rlp-license.xml
+    - BT license file
+
+cma.cf
+    - BT chinese tokenizer configuration file
+
+jma.cf
+    - BT japanese tokenizer configuration file
+
+rli.cf
+    - BT language indentifier configuration file

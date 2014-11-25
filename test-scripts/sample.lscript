@@ -1,0 +1,331 @@
+#*****************************************************************************
+#       Copyright (C) 1993-2011, FS Consulting LLC. All rights reserved      *
+#                                                                            *
+#  This notice is intended as a precaution against inadvertent publication   *
+#  and does not constitute an admission or acknowledgement that publication  *
+#  has occurred or constitute a waiver of confidentiality.                   *
+#                                                                            *
+#  This software is the proprietary and confidential property                *
+#  of FS Consulting LLC.                                                     *
+#*****************************************************************************
+
+
+#
+# Sample LWPS Script
+#
+
+openConnection tcp localhost 9000
+language en
+
+openIndex jfif
+
+searchOffsets 0 19
+searchReport formatted
+
+#searchList Carollia {d:e} {sc:d} {sort:relevance:desc}
+#searchList title=Carollia {d:e} {sc:d} {sort:relevance:desc}
+#searchList text=Carollia {d:e} {sc:d} {sort:relevance:desc}
+#searchList Funerary {d:e} {sc:d} {sort:relevance:desc}
+#searchList title=Funerary {d:e} {sc:d} {sort:relevance:desc}
+#searchList animals {d:e} {sc:d} {sort:relevance:desc}
+#searchList title=animals {d:e} {sc:d} {sort:relevance:desc}
+
+closeIndex
+closeConnection
+
+exit
+
+
+
+
+
+
+
+
+openConnection tcp linux32.local 9000
+#language en
+
+#openIndex hci-bib
+openIndex joint
+
+searchReport formatted
+searchOffsets 0 19
+searchList animals
+#searchList animals {sort:relevance:desc}
+#searchList animals {sort:relevance:asc}
+#searchList animals {sort:date:desc}
+#searchList animals {sort:date:asc}
+#searchList animals {sort:author:desc}
+#searchList animals {sort:author:asc}
+
+#searchList animals {date>1990}
+#searchList animals {date<1990}
+
+#retrieveDocument joint [jfif/1] document text/plain
+retrieveDocument joint [lwps://linux32.local:9001/joint/jfif/1] document text/plain
+#retrieveDocument joint [lwps://linux32.local:9001/joint/hci-bib/17307] abstract text/refer
+#retrieveDocument joint [lwps://linux32.local:9001/joint/omim/276700] document text/plain
+
+closeIndex
+closeConnection
+
+exit
+
+
+
+
+
+
+
+# Get some server information
+getServerInfo
+getServerIndexInfo
+
+
+
+
+# Open the hci-bib index
+openIndex hci-bib
+
+# Get some index information
+getIndexInfo hci-bib
+getIndexFieldInfo hci-bib
+getIndexDocumentInfo hci-bib
+getDocumentInfo hci-bib [1]
+
+# Set the maximum number of documents returned to 1000
+searchOffsets 0 999
+
+# Run a search and list the results
+searchList animals
+
+# Add relevance feedback text, run a search, and clear the relevance feedback text 
+addPositiveFeedback human computer interaction user interface design  supported cooperative work
+search animals
+clearPositiveFeedback
+
+# Run a number of searches, but dont list the results
+search human computer interaction
+search user interface design
+search computer supported cooperative work
+search interactive software development
+search abstract=(interactive software development)
+search author=marchionini
+search author=marchio????
+search author=march*
+search soundex[marchionini]
+search typo[marchionini]
+search marchionini AND date>1990
+search marchionini AND date<=1990
+search (marchionini AND date<=1990) OR (marchionini)
+
+# Get documents
+retrieveDocument hci-bib [1] document text/plain
+retrieveDocument hci-bib [2000] document text/plain
+retrieveDocument hci-bib [3091] document text/plain
+
+retrieveDocument jfif [1] document text/plain
+retrieveDocument jfif [20] document text/plain
+retrieveDocument jfif [31] document text/plain
+
+# And close the index
+closeIndex
+
+
+# Open the jfif index
+openIndex jfif
+
+# Get some index information
+getIndexInfo jfif
+getIndexFieldInfo jfif
+getIndexDocumentInfo jfif
+getDocumentInfo jfif [1]
+
+# Set the maximum number of documents returned to 1000
+searchOffsets 0 999
+
+# Run a search and list the results
+searchList animals
+
+# Run a search and list the results
+searchList minerals AND gems
+
+# Get documents
+retrieveDocument hci-bib [1] document text/plain
+retrieveDocument hci-bib [2000] document text/plain
+retrieveDocument hci-bib [3091] document text/plain
+
+retrieveDocument jfif [1] document text/plain
+retrieveDocument jfif [20] document text/plain
+retrieveDocument jfif [31] document text/plain
+
+# And close the index
+closeIndex
+
+
+
+
+# Open the hci-bib & jfif indexs
+openIndex hci-bib, jfif
+
+# Set the maximum number of documents returned to 1000
+searchOffsets 0 999
+
+# Run a search and list the results
+searchList animals
+
+# Run a number of searches, but dont list the results
+search human computer interaction
+search user interface design
+search computer supported cooperative work
+search interactive software development
+
+# Add relevance feedback text
+addPositiveFeedback human computer interaction user interface design  supported cooperative work
+
+# Run a number of searches, but dont list the results
+search human computer interaction
+search user interface design
+search computer supported cooperative work
+search interactive software development
+
+# Clear the relevance feedback text 
+clearPositiveFeedback
+
+
+# Get documents
+retrieveDocument hci-bib [1] document text/plain
+retrieveDocument hci-bib [2000] document text/plain
+retrieveDocument hci-bib [3091] document text/plain
+
+retrieveDocument jfif [1] document text/plain
+retrieveDocument jfif [20] document text/plain
+retrieveDocument jfif [31] document text/plain
+
+
+# And close the indexs
+closeIndex
+
+
+
+# Open the hci-bib index
+openIndex hci-bib
+
+# Get some index information
+getIndexInfo hci-bib
+getIndexFieldInfo hci-bib
+getIndexDocumentInfo hci-bib
+getDocumentInfo hci-bib [1]
+
+
+# Get some word information (all words)
+#getIndexWordInfo hci-bib 1
+
+# Get some word information (stop words)
+#getIndexWordInfo hci-bib 2
+
+# Get some word information (soundex words)
+#getIndexWordInfo hci-bib 3 marchionini
+#getIndexWordInfo hci-bib 3 marchionini author
+
+# Get some word information (metaphone words)
+#getIndexWordInfo hci-bib 4 marchionini
+#getIndexWordInfo hci-bib 4 marchionini athor
+
+# Get some word information (phonix words)
+#getIndexWordInfo hci-bib 5 marchionini
+#getIndexWordInfo hci-bib 5 marchionini author
+
+# Get some word information (partial words)
+#getIndexWordInfo hci-bib 7 march*
+getIndexWordInfo hci-bib 7  march*  author
+
+# Get some word information (typo words)
+#getIndexWordInfo hci-bib 8 marchionini 
+
+
+# And close the indexs
+closeIndex
+
+
+
+# Open the jfif index
+openIndex jfif
+
+# Get some index information
+getIndexInfo jfif
+getIndexFieldInfo jfif
+getIndexDocumentInfo jfif
+getDocumentInfo jfif [1]
+
+
+# And close the indexs
+closeIndex
+
+
+
+# Open the jfif index
+openIndex jfif
+
+# Get some index information
+getIndexInfo jfif
+getIndexFieldInfo jfif
+getIndexDocumentInfo jfif
+getDocumentInfo jfif [1]
+
+
+# Get some word information (all words)
+#getIndexWordInfo   1
+
+# Get some word information (stop words)
+#getIndexWordInfo jfif 2
+
+# Get some word information (soundex words)
+#getIndexWordInfo jfif 3    marchionini
+#getIndexWordInfo jfif 3    marchionini author
+
+# Get some word information (metaphone words)
+#getIndexWordInfo jfif 4    marchionini
+#getIndexWordInfo jfif 4    marchionini athor
+
+# Get some word information (phonix words)
+#getIndexWordInfo jfif 5    marchionini
+#getIndexWordInfo jfif 5    marchionini author
+
+# Get some word information (partial words)
+#getIndexWordInfo jfif 7    march*
+getIndexWordInfo jfif 7 march*  author
+
+# Get some word information (typo words)
+#getIndexWordInfo jfif 8    marchionini 
+
+
+
+# And close the indexs
+closeIndex
+
+
+
+
+# Get documents
+retrieveDocument hci-bib [1] document text/plain
+
+retrieveDocument hci-bib [20] document text/plain
+
+retrieveDocument hci-bib [31] document text/plain
+
+retrieveDocument hci-bib [24] document text/plain
+
+retrieveDocument hci-bib [26] document text/plain
+
+
+
+# We have finished with the connection
+closeConnection
+
+
+# And we exit the script
+exit
+
+
+

@@ -1,0 +1,78 @@
+#*****************************************************************************
+#       Copyright (C) 1993-2011, FS Consulting LLC. All rights reserved      *
+#                                                                            *
+#  This notice is intended as a precaution against inadvertent publication   *
+#  and does not constitute an admission or acknowledgement that publication  *
+#  has occurred or constitute a waiver of confidentiality.                   *
+#                                                                            *
+#  This software is the proprietary and confidential property                *
+#  of FS Consulting LLC.                                                     *
+#*****************************************************************************
+
+
+Search Syntax in pseudo-BNF notation:
+-------------------------------------
+
+A vertical line '|' indicates alternatives
+An escape '\' means just that
+Brackets '[]' indicate optional parts
+Brackets with elipsis '[...]' indicate repeating optional parts
+
+digit       := 0-9
+sign        := [+,-]
+number      := [sign] digit[...]
+weight      := [sign]number[.number]
+character   := [a-z, A-Z, 0-9, -]
+word        := character[character\*\?[...]][\[weight\]]
+field       := character[...]
+range       := = | > | >= | < | <= | !=
+function    := soundex | typo | metaphone | phonix | literal | range
+lparen      := (
+rparen      := ) 
+operator    := ADJ | NEAR | OR | AND | NOT 
+modifier    := {NOHITS} | {NOREPORT} | {SORT:RELEVANCE:ASC} | {SORT:RELEVANCE:DESC} | {SORT:DATE:ASC} | {SORT:DATE:DESC} | 
+        {SORT:field:ASC} | {SORT:field:DESC} | {OR} | {AND} | {ADJ} | {NEAR[\[number\]]} | 
+        {DATE range number} | {BOOLEANRELAXED} | {BOOLEANSTRICT}
+term        := [field range][function\[]word\]
+phrase      := [field range]"word [...]"
+terms       := [field range lparen]|[ lparen ] term|phrase|terms [operator] term|phrase|terms [ rparen ]
+
+search      := terms [modifier [...]]
+
+
+Operator precendence in ascending order:
+
+    ADJ, NEAR, OR, AND, NOT, ()
+
+
+
+So all the queries below are valid:
+
+comput*
+comput??
+comp*ing
+comp??ing
+author=(marchionini AND croft) {DATE>1990}
+author=(marchionini AND croft) AND title=(computer AND encyclopedia) {DATE=1990}
+author=(marchionini AND croft AND title=(computer AND encyclopedia) ) 
+soundex[marchionini]
+author=soundex[marchionini]
+typo[marchionini]
+metaphone[marchionini]
+phonix[marchionini]
+author=typo[marchionini]
+(((ti=a ADJ ti=b) AND (c ADJ d)) OR (e AND F*))
+((company OR picnic OR term)  (apple OR computers))
+(lowland gorilla AND adult male) OR (canopic jar)
+information retrieval systems NOT wais
+information retrieval systems NOT "wide area information servers"
+((company picnic term) NOT (apple computers))
+company picnic term NOT "apple computers"
+company picnic term AND "apple computers"
+company AND pinic NOT apple AND computers
+marchionini NEAR[10] croft
+marchionini NEAR[+20] croft
+marchionini NEAR[-30] croft
+marchionini[0.7] croft[1.4]
+this is a test of the free text retrieval portions without brackets {AND}
+(this is a test of the free text retrieval portions with brackets)

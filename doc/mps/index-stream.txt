@@ -1,0 +1,317 @@
+#*****************************************************************************
+#       Copyright (C) 1993-2011, FS Consulting LLC. All rights reserved      *
+#                                                                            *
+#  This notice is intended as a precaution against inadvertent publication   *
+#  and does not constitute an admission or acknowledgement that publication  *
+#  has occurred or constitute a waiver of confidentiality.                   *
+#                                                                            *
+#  This software is the proprietary and confidential property                *
+#  of FS Consulting LLC.                                                     *
+#*****************************************************************************
+
+
+Index Stream Format:
+--------------------
+
+
+Introduction:
+-------------
+
+This document describes the format of the indexing stream that is 
+accepted by the indexer to create/update databases. The main design
+goal of this stream is to provide a structured method of passing
+information from a parser to the indexer without the latter having to 
+worry about the internal structure of the documents or the parsing 
+process. One can think of this as a client/server model for indexing
+a document collection. 
+
+
+Process:
+--------
+
+The indexing process is fairly simple. The indexer will read a line
+at a time from the index stream and process it based on what it 
+finds in the line.
+
+The index stream can be fed in from mpsparser, a custom parser or
+from a file. The only constraint is that mpsindex expects to read the 
+index stream on stdin.
+
+The process starts off with a version number check (using the 'V' line.)
+The parser must pass a version number line to the indexer which will then 
+check to see if it can accept this stream. The version check that occurs 
+is based on two simple rules:
+
+    - Major version numbers are the same.
+    - Parser minor version number is less than or equal to indexer minor
+      version number.
+
+The parser can then submit a number of field names/ids to identify the 
+fields passed with the words. The field names/ids must be submitted 
+before the field id is submitted as part of a word line otherwise the
+word line will be rejected. If a database is being appended to, the 
+field names/ids need to be submitted and will be remaped if needed,
+so that one may add new fields to an existing databases.
+
+The parser can then submit a number of composite document entries. These
+entries allow the definition of virtual documents from a selected 
+set of document item and mime types. For example a short version of a 
+bibliographic record might consists of a title, an author and an abstract 
+whereas a long version of that record would include more information. 
+This is best illustrated with an example as follows:
+
+    F title text/plain 200
+    F author text/plain 100
+    F abstract text/plain 2000
+
+In the example defined above, the title, author and abstract fields consist of 
+real data, wherease the composite entry, 'shortRecord', is composed of the 
+three types.
+
+The parser will then submit the all the information for a document,
+typically the sequence will look like this:
+
+    submit the terms
+    submit the title
+    submit the document date/time
+    submit the document item & mime/type information
+    submit the document key
+    submit an end of document marker
+
+This sequence will be repeated for every document to be indexed.
+
+Once all the documents are parsed, the index needs to be told that this
+is all using an end of stream message (the 'Z' line.)
+
+At any point in the stream, the parser can submit a message to be 
+printed out by the indexer (using the 'M' line.)
+
+The document type can be immediately followed by a mime message which would
+be the contents of that document. This document will be stored in the 
+repository and will be returned by the search engine when it is needed.
+In the example below, a document type is registed followed by a mime
+message for that document.
+
+I objectElement text/plain 457 /local/data/jfif/ameths.TEXT 0 456
+Content-type: text/plain
+Content-length: 457
+
+Quartz amethyst
+
+Quartz amethyst, one of the generally recognized quartz gem stones.
+In its many forms, colors, varieties and possible uses, quartz
+is one of the most diverse natural substances known.  This beautiful
+purple crystal formation is from the gem and mineral collection
+of the Smithsonian's National Museum of Natural History.==Smithsonian
+photo by Dane A. Penland.  (c) 1992 Smithsonian Institution.
+Do Not Reproduce Without Written Permission.
+
+
+Information Stream Line Formats:
+--------------------------------
+
+[]  optional fields (can be omitted from the stream)
+()  comments (not part of the stream)
+{}  field data type (A - alpha, N - numeric, D - date (yyyymmdd) , T - time (hhmmss))
+
+V major_version{N} minor_version{N} (Version Number)
+N index_name{A} index_description{A} (Index Name/Description)
+L language{A} character_set{A} tokenizer{A} (Language)
+
+
+F field_name{A} field_id{N} field_type{A} field_option{A}[,...] [field_description{A}] (Field names)
+S field_name{A}[,...] (Unfield search field names - optional)
+L language{A} (Language - optional, first language passed is used as the document language)
+T term [term_position{N}] field_id{N} (Term, term position is required for fields which store positional information)
+D date{D} (Document ansi date - optional)
+H title{A} (Title - optional)
+I item_name{A} mime_type{A} length{N} [filename{A} start{N} end{N}] [URL{A}] (Document types and source files - optional)
+K key{A} (Document key - optional)
+R rank{N} (Document rank - optional)
+C count{N} (Document term count - optional)
+M message{A} (Message to be displayed by the indexer - optional)
+E (End of document marker)
+Z (End of parse stream - optional)
+
+
+Index Stream BNF:
+-----------------
+
+legend
+::=     is defined as ...
+[Term]  Term is optional
+Term*   Term may repeat (one or more)
+[Term]* Term may repeat (zero or more)
+A | B   A or be may be present
+A B*    A followed by one or more B
+
+ParserOutput           ::= Version LanguageSpec NameSpec [FieldSpec*]
+                         Document* FinalIndicator
+
+Version                ::= V MAJOR_VERSION MINOR_VERSION
+
+LanguageSpec           ::= L LANGUAGE CHARACTER_SET TOKENIZER
+
+NameSpec               ::= N NAME DESCRIPTION
+
+FieldSpec              ::= F FIELD_NAME FIELD_ID FIELD_OPTIONS FIELD_DESCRIPTION
+
+Document               ::= Element* EndIndicator
+
+Element                ::= DocumentLanguageSpec | TermSpec | DateSpec | TitleSpec
+                              | KeySpec | RankSpec | TermCountSpec | | BreakSpec | ItemSpec
+
+DocumentLanguageSpec   ::= L LANGUAGE
+
+TermSpec               ::= T TERM FIELD_ID
+
+DateSpec               ::= D YYYYMMDDHHMMS
+
+TitleSpec              ::= H TITLE
+
+KeySpec                ::= K KEY
+
+RankSpec               ::= R RANK
+
+TermCountSpec          ::= C TERM_COUNT
+
+ItemSpec               ::= I ITEM TYPE LENGTH [FILENAME START_OFFSET END_OFFSET][URL]
+
+EndIndicator           ::= E
+
+FinalIndicator         ::= Z
+
+**note**
+The following symbols can appear anywhere, they are treated like comments
+Message         ::= M MESSAGE
+********
+Main sections of the output file ...
+
+Version                 ::= V MAJOR_VERSION MINOR_VERSION
+LanguageSpec            ::= L LANGUAGE CHARACTER_SET TOKENIZER
+NameSpec                ::= N NAME DESCRIPTION
+FieldSpec               ::= F FIELD_NAME FIELD_ID FIELD_OPTIONS FIELD_DESCRIPTION              
+                                -- repeats
+
+                        -- for each document these fields may be repeated
+DocumentLanguageSpec    ::= L LANGUAGE
+TermSpec                ::= T TERM FIELD_ID*
+DateSpec                ::= D YYYYMMDDHHMMS
+TitleSpec               ::= H TITLE
+KeySpec                 ::= K KEY
+RankSpec                ::= R RANK
+TermCountSpec           ::= C TERM_COUNT
+BreakSpec               ::= B BREAK_COUNT
+ItemSpec                ::= I ITEM TYPE LENGTH [FILENAME START END][URL]
+
+EndIndicator            ::= E   -- at the end of each document this must appear,
+                                -- then another document can be added
+
+FinalIndicator          ::= Z   -- this appears after the last document
+
+Message                 ::= M MESSAGE_TEXT -- may appear anywhere
+
+
+Index Stream Examples:
+----------------------
+
+A database containing multiple items per document.
+
+V 0 0
+L en UTF-8 fsclt-4
+F title 1 Title
+F text 2 Text
+M Indexing file: /local/data/jfif/ameths.TEXT
+L en
+T Quartz 1 
+T amethyst 1 
+.
+.
+.
+T Reproduce 0 
+T Without 0 
+T Written 0 
+T Permission 0
+K 1
+H Quartz amethyst 
+I document text/plain 457 /local/data/jfif/ameths.TEXT 0 456 http://www.fsconsult.com/jfif/ameths.TEXT
+I image image/jpeg 54815 /local/data/jfif/ameths.JFIF 0 54814 http://www.fsconsult.com/jfif/ameths.JFIF
+I thumbnail image/jpeg /local/data/jfif/ameths.JFIF-TBNL 0 5304 http://www.fsconsult.com/jfif/ameths.JFIF-TBNL
+E
+M Indexing file: /local/data/jfif/anubis.TEXT
+L en
+T An 1
+T Egyptian 1 
+T Anubis 1
+T Figure 1
+.
+.
+.
+T Reproduce 0 
+T Without 0 
+T Written 0 
+T Permission 0
+K 50
+H An Egyptian Anubis Figure 
+I document text/plain 392 /local/data/jfif/anubis.TEXT 0 391 http://www.fsconsult.com/jfif/anubis.TEXT
+I image image/jpeg 66800 /local/data/jfif/anubis.JFIF 0 66799 http://www.fsconsult.com/jfif/anubis.JFIF
+I thumbnail image/jpeg 6372 /local/data/jfif/anubis.JFIF-TBNL 0 6371 http://www.fsconsult.com/jfif/anubis.JFIF-TBNL
+E
+M Finished parsing.
+M Parsing time for this database: 0 minute(s) and 1 second(s).
+Z
+
+
+
+
+
+A database containing a single element per document, heavily fielded
+information.
+
+V 6 1
+L en UTF-8 fsclt-4
+F author 1 Author's name
+F book 2 Book containing article referenced
+F city 3 City (place of publication)
+F date 4 Date of publication
+F editor 5 Editor of book containing article
+F footnote 6 Footnote number or label (computed)
+F govt 7 Government order number
+F commentary 8 Header commentary, printed before ref.
+F publisher 9 Issuer (publisher)
+F journal 10 Journal containing article
+F keyword 11 Keywords to help search for references
+F label 12 Label field used by -k option of refer
+F bell 13 Bell Labs Memorandum (undefined)
+F issue 14 Number of issue within volume
+F other 15 Other commentary, printed after ref.
+F page 16 Page number(s)
+F corporate 17 Corporate, Foreign Author
+F report 18 Report, paper, thesis (unpublished)
+F series 19 Series title
+F title 20 Title of article or book
+F annotation 21 User annotations, stored separately
+F volume 22 Volume number
+F undefined 23 undefined by refer
+F abstract 24 Abstract
+F toc 25 Table of Contents
+F reference 26 References
+M Indexing file: /local/data/hci-bib/BCSHCI85.bib
+L en
+T Modelling 20
+T User 20
+T Behaviour 20
+T with 20
+.
+.
+.
+T user 24
+T behaviour 24
+K 1000
+H A. J. Fountain  (1985) Modelling User Behaviour with Formal Grammar
+D 19850000
+I document text/plain 1453 /local/data/hci-bib/BCSHCI85.bib 0 1452
+E
+M Finished parsing.
+M Parsing time for this database: 3 minute(s) and 59 second(s).
+Z

@@ -1,0 +1,2006 @@
+#*****************************************************************************
+#       Copyright (C) 1993-2011, FS Consulting LLC. All rights reserved      *
+#                                                                            *
+#  This notice is intended as a precaution against inadvertent publication   *
+#  and does not constitute an admission or acknowledgement that publication  *
+#  has occurred or constitute a waiver of confidentiality.                   *
+#                                                                            *
+#  This software is the proprietary and confidential property                *
+#  of FS Consulting LLC.                                                     *
+#*****************************************************************************
+
+
+#
+# Sample SPI Script
+#
+
+#skip
+
+
+initializeServer /var/lib/mps/index /var/lib/mps/conf
+language en
+openIndex omim
+
+searchOffsets 0 9
+#searchReport raw
+searchReport formatted
+
+#search 310200 {d:e} {sort:relevance:desc}
+search duchenne {d:e} {sort:relevance:desc}
+#search duchenne {d:e} {unfielded_search_field_names:TI} {sort:relevance:desc}
+#search duchenne {d:e} {usfn:TI} {sort:relevance:desc}
+
+
+#search lions {d:e} {sc:d} {sort:relevance:desc}
+#search lions animals {d:e} {sc:d} {sort:relevance:desc}
+#search epithelial alanine erythrocytes Testudo {d:e} {sc:d} {sort:relevance:desc}
+#search medical {d:e} {sc:d} {sort:relevance:desc}
+
+#search test\[test {d:e} {sc:d} {sort:relevance:desc}
+#search fra\ncois {d:e} {sc:d} {sort:relevance:desc}
+#search Carollia*  {d:e} {sc:d} {sort:relevance:desc}
+#search francois@fsconsult.com {d:e} {sc:d} {sort:relevance:desc}
+#search francois\@fsconsult.com {d:e} {sc:d} {sort:relevance:desc}
+
+#search Tekzilla {d:e} {sc:d} {sort:date:desc}
+#search user_name=fschiettecatte@gmail.com {d:e} {sc:d} {sort:date:desc}
+#search recommandée {d:e} {sc:d} {sort:date:desc}
+#search redémarrage {d:e} {sc:d} {sort:date:desc}
+#search détails {d:e} {sc:d} {sort:date:desc}
+
+#searchList Firefox {inclusion_filter:source_url=http://fschiettecatte.wordpress.com/feed/,source_url=http://revision3.com/tekzilla/feed/quicktime-high-definition/} {sort:date:desc} {debug:enable}
+#searchList (systm AND source_url=http://revision3.com/systm/feed/quicktime-large/) OR (Firefox AND source_url=http://fschiettecatte.wordpress.com/feed/) OR (Firefox AND source_url=http://revision3.com/tekzilla/feed/quicktime-high-definition/) {sort:date:desc} {debug:enable}
+#search Carollia [foo] {d:e} {sc:d} {sort:relevance:desc}
+
+
+#searchList weblog search engine {d:e} {sc:d} {sort:relevance:desc}
+#search Carollia {d:e} {sc:d} {sort:relevance:desc}
+#search Carollia {d:e} {sc:d} {sort:default}
+#search Carollia {d:e} {sc:d} {sort:none}
+#search title=Carollia {d:e} {sc:d} {sort:relevance:desc}
+#search text=Carollia {d:e} {sc:d} {sort:relevance:desc}
+#search Funerary {d:e} {sc:d} {sort:relevance:desc}
+#search title=Funerary {d:e} {sc:d} {sort:relevance:desc}
+#search animals {d:e} {sc:d} {sort:relevance:desc}
+#search title=animals {d:e} {sc:d} {sort:relevance:desc}
+#search an* {d:e} {sc:d} {sort:relevance:desc}
+#search title=an* {d:e} {sc:d} {sort:relevance:desc}
+#search duchenne muscular dystrophy AU:Bertorini_TE {d:e} {sc:d} {sort:relevance:desc}
+
+#searchList fee \(foo) {debug:enable} {search_cache:disable}
+#searchList literal[\(1\+1\)\:2] {debug:enable} {search_cache:disable}
+#searchList animals {d:e} {sc:d} {s:r:a} {tw:2}
+#search animals {d:e} {sc:d} {s:r:a} {tw:2}
+#search lions bats {d:e} {sc:d} {s:r:a} {tw:2}
+#search bats {d:e} {sc:d} {s:r:a} {tw:2}
+
+#searchList title="crushing aluminum cans" {debug:enable} {search_cache:disable}
+#searchList title=(crushing aluminum cans) {debug:enable} {search_cache:disable}
+#searchList title=(crushing "aluminum cans") {debug:enable} {search_cache:disable}
+
+#searchList crushing aluminum cans {debug:enable} {search_cache:disable}
+#searchList cans aluminum crushing {debug:enable} {search_cache:disable}
+#searchList title=lion {debug:enable} {search_cache:disable}
+#searchList text=lion {debug:enable} {search_cache:disable}
+#searchList animals {date>1990} {date<2100} {debug:enable} {search_cache:disable}
+#searchList animals {date>1990,<=2100,<=3100} {language:en,fr,de} {debug:enable} {search_cache:disable}
+#searchList an* {debug:enable} {search_cache:disable}
+#searchList text=an* {debug:enable} {search_cache:disable}
+
+
+#searchList minerals {search_cache:disable} {tag:22 documents}
+#searchList diamond {search_cache:disable} {tag:4 documents}
+#searchList minerals AND diamond {search_cache:disable} {tag:3 documents}
+#searchList minerals OR diamond {search_cache:disable} {tag:23 documents}
+
+#searchList bats OR animals {search_cache:disable} {tag:2 documents}
+#searchList bats {search_cache:disable} {tag:2 documents}
+#searchList foobad {search_cache:disable} {tag:2 documents}
+
+
+
+#searchList Donna OR Klumpp {search_cache:disable} {tag:2 documents}
+#searchList Donna OR Klumpp OR assembled {search_cache:disable} {tag:2 documents}
+#searchList Donna OR Klumpp OR who OR assembled {search_cache:disable} {tag:4 documents}
+
+#searchList bats OR lions {search_cache:disable} {tag:2 documents}
+#searchList bats OR +lions {search_cache:disable} {tag:1 document}
+#searchList bats OR +lions OR +BioPark {search_cache:disable} {tag:1 document}
+#searchList +bats OR lions {search_cache:disable} {tag:1 document}
+#searchList +bats OR +lions {search_cache:disable} {tag:0 documents}
+#searchList +elephants OR animals {search_cache:disable} {tag:2 document}
+#searchList elephants OR +animals {search_cache:disable} {tag:7 documents}
+#searchList +elephants OR +animals {search_cache:disable} {tag:2 document}
+#searchList Donna OR +animals {search_cache:disable} {tag:7 documents}
+
+#searchList Donna OR Klumpp {search_cache:disable} {tag:2 documents}
+#searchList Donna OR +Klumpp {search_cache:disable} {tag:2 documents}
+#searchList +Donna OR Klumpp {search_cache:disable} {tag:2 documents}
+#searchList +Donna OR +Klumpp {search_cache:disable} {tag:2 documents}
+
+
+#searchList Donna XOR Klumpp {search_cache:disable} {tag:0 documents}
+#searchList lions XOR bats {search_cache:disable} {tag:2 documents}
+#searchList bats XOR animals {search_cache:disable} {tag:6 documents}
+#searchList elephants XOR animals {search_cache:disable} {tag:5 documents}
+#searchList animals XOR elephants {search_cache:disable} {tag:5 documents}
+#searchList bats XOR animals {search_cache:disable} {tag:6 documents}
+#searchList animals XOR bats {search_cache:disable} {tag:6 documents}
+#searchList lions XOR animals {search_cache:disable} {tag:6 documents}
+#searchList animals XOR lions {search_cache:disable} {tag:6 documents}
+#searchList Donna XOR animals {search_cache:disable} {tag:9 documents}
+
+
+#searchList Donna IOR Klumpp {search_cache:disable} {tag:2 documents}
+#searchList Donna IOR animals {search_cache:disable} {tag:2 documents}
+#searchList elephants IOR animals {search_cache:disable} {tag:2 documents}
+#searchList animals IOR elephants {search_cache:disable} {tag:7 documents}
+#searchList bats IOR animals {search_cache:disable} {tag:1 document}
+#searchList animals IOR bats {search_cache:disable} {tag:7 documents}
+#searchList lions IOR animals {search_cache:disable} {tag:1 document}
+#searchList animals IOR lions {search_cache:disable} {tag:7 documents}
+
+
+#searchList Donna AND Klumpp {search_cache:disable} {tag:2 documents}
+#searchList Klumpp AND Donna {search_cache:disable} {tag:2 documents}
+
+#searchList Donna AND Klumpp AND assembled {search_cache:disable} {tag:2 documents}
+#searchList Donna AND (Klumpp OR assembled) {search_cache:disable} {tag:2 documents}
+
+#searchList animals AND elephants {search_cache:disable} {tag:2 documents}
+#searchList elephants AND animals {search_cache:disable} {tag:2 documents}
+#searchList animals AND smithsonian {search_cache:disable} {tag:7 documents}
+#searchList animals AND (bats OR lions) {search_cache:disable} {tag:2 documents}
+#searchList (bats OR lions) AND animals {search_cache:disable} {tag:2 documents}
+#searchList animals AND (bats OR elephants) {search_cache:disable} {tag:3 documents}
+#searchList (bats OR elephants) AND animals {search_cache:disable} {tag:3 documents}
+
+
+#searchList "Donna Klumpp" {search_cache:disable} {tag:2 documents}
+#searchList "Donna Klumpp assembled" {search_cache:disable} {tag:0 documents}
+#searchList "Donna Klumpp who assembled" {search_cache:disable} {tag:2 documents}
+#searchList "Donna animals" {search_cache:disable} {tag:0 documents}
+
+
+#searchList Donna NEAR Klumpp {search_cache:disable} {tag:2 documents}
+#searchList Donna NEAR[10] Klumpp {search_cache:disable} {tag:2 documents}
+#searchList Donna NEAR[+10] Klumpp {search_cache:disable} {tag:2 documents}
+#searchList Donna NEAR[-10] Klumpp {search_cache:disable} {tag:0 documents}
+#searchList Klumpp NEAR Donna {search_cache:disable} {tag:2 documents}
+#searchList Klumpp NEAR[10] Donna {search_cache:disable} {tag:2 documents}
+#searchList Klumpp NEAR[+10] Donna {search_cache:disable} {tag:0 documents}
+#searchList Klumpp NEAR[-10] Donna {search_cache:disable} {tag:2 documents}
+
+
+#searchList animals NOT elephants {search_cache:disable} {tag:5 documents}
+#searchList animals NOT Donna {search_cache:disable} {tag:7 documents}
+#searchList animals NOT (bats OR lions) {search_cache:disable} {tag:5 documents}
+
+
+
+
+#search animals language=en {debug:enable} {search_cache:disable}
+#search animals lang=en {debug:enable} {search_cache:disable}
+#search animals langcalc=en {debug:enable} {search_cache:disable}
+#search animals {inclusion_filter:language=en} {debug:enable} {search_cache:disable}
+#search animals {inclusion_filter:lang=en} {debug:enable} {search_cache:disable}
+#search animals {inclusion_filter:langcalc=en} {debug:enable} {search_cache:disable}
+#
+#search animals weblog_language=en {debug:enable} {search_cache:disable}
+#search animals weblog_lang=en {debug:enable} {search_cache:disable}
+#search animals weblog_langcalc=en {debug:enable} {search_cache:disable}
+#search animals {inclusion_filter:weblog_language=en} {debug:enable} {search_cache:disable}
+#search animals {inclusion_filter:weblog_lang=en} {debug:enable} {search_cache:disable}
+#search animals {inclusion_filter:weblog_langcalc=en} {debug:enable} {search_cache:disable}
+#
+#search animals {inclusion_filter:lang=en,lang=fr} {debug:enable} {search_cache:disable}
+
+
+
+#search animals {debug:enable} {search_cache:disable}
+#search noobie {debug:enable} {search_cache:disable}
+#search abstract=noobie {debug:enable} {search_cache:disable}
+
+#search {inclusion_filter:title=animals} {debug:enable} {search_cache:disable}
+#search {inclusion_filter:*=animals} {debug:enable} {search_cache:disable}
+#search {inclusion_filter:animals} {debug:enable} {search_cache:disable}
+
+#search animals {debug:enable} {search_cache:disable}
+#search title=bats {debug:enable} {search_cache:disable}
+#search animals {inclusion_filter:bats} {debug:enable} {search_cache:disable}
+#search animals {exclusion_filter:bats} {debug:enable} {search_cache:disable}
+#search {inclusion_filter:bats} {debug:enable} {search_cache:disable}
+#search {exclusion_filter:bats} {debug:enable} {search_cache:disable}
+#search animals {inclusionfilter=bats} {debug:enable} {search_cache:disable}
+#search animals {inclusion_filter:text=bats} {debug:enable} {search_cache:disable}
+#search animals {inclusion_filter:text=bats,text=elephants} {debug:enable} {search_cache:disable}
+#search animals {exclusion_filter:text=bats,text=elephants} {debug:enable} {search_cache:disable}
+#search animals {inclusion_filter:title=bats} {debug:enable} {search_cache:disable}
+#search animals {inclusion_filter:title=bats,title=elephants} {debug:enable} {search_cache:disable}
+#search animals {exclusion_filter:title=bats,title=elephants} {debug:enable} {search_cache:disable}
+
+
+
+#search animals near bats {booleansearch} {search_cache:disable}
+#search animals near bats {freetextsearch} {search_cache:disable}
+#search animals near bats {search_cache:disable}
+#searchList infant near Lowland near Gorilla {search_cache:disable}
+#search What information is available on petroleum exploration in the South Atlantic near the Falkland Islands? {boolean_operation:relaxed} {boolean_operator:or} {search_cache:disable}
+#search What information is available on petroleum exploration in the South Atlantic near the Falkland Islands? {boolean_operation:relaxed} {boolean_operator:or} {search_cache:disable}
+
+
+
+#searchList {date>2006} {search_cache:disable} {tag:50 documents}
+#searchList {inclusion_filter:animals} {search_cache:disable} {tag:7 documents}
+#searchList {exclusion_filter:animals,gems} {search_cache:disable} {tag:23 documents}
+#searchList {exclusion_filter:animals,minerals} {search_cache:disable} {tag:22 documents}
+
+
+closeIndex
+shutdownServer
+
+exit
+
+
+resume
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language en
+openIndex posts
+
+searchOffsets 0 39
+searchReport formatted
+
+
+#search 阿美利哥·维斯普西  {sort:date:desc} {debug:enable} {search_cache:disable}
+
+#search url:http://yanksvsox.blogspot.com/atom.xml* {sort:date:desc} {debug:enable} {search_cache:disable}
+
+#search {tag:fp_3_123_1} {replicaaffinity:0} {inclusion_filter:url:http://yanksvsox.blogspot.com/atom.xml*,url:http://journals.aol.com/alexredsox076/Alexssportsblog/atom.xml*,url:http://www.around-the-horn.com/wp-rss2.php*,url:http://blogsox.blogspot.com/atom.xml*,url:http://www.baseballmusings.com/Boston.xml*,url:http://baseballzeitgeist.blogspot.com/atom.xml*,url:http://basegirl.blogspot.com/atom.xml*,url:http://felineanarchy.blogspot.com/atom.xml*,url:http://bloodsox.blogspot.com/atom.xml*,url:http://callofthegreenmonster.typepad.com/call_of_the_green_monster/index.rdf*,url:http://confessionalpoet.typepad.com/cursed_to_first/atom.xml*,url:http://elguaposghost.blogspot.com/atom.xml*,url:http://www.genuinelove.org/rssfeed.xml*,url:http://redsoxdiary.blogspot.com/atom.xml*,url:http://kennedyscommentary.blogspot.com/atom.xml*,url:http://rivers49.blogspot.com/atom.xml*,url:http://alligatorbutton.blogspot.com/atom.xml*,url:http://www.onlybaseballmatters.com/index.xml*,url:http://redsoxrealitycheck.blogspot.com/atom.xml*,url:http://redsoxstats.blogspot.com/atom.xml*,url:http://www.sawxblog.com/index.rdf*,url:http://www.overthemonster.com/rss/index.rdf*,url:http://sox1fan.com/?feed=atom/*,url:http://www.survivinggrady.com/atom.xml*,url:http://bloopcurve.com/?feed=rss2/*,url:http://thebostonblogger.blogspot.com/atom.xml*,url:http://gysnetwork.blogspot.com/atom.xml*,url:http://www.deweyshouse.com/feed/rss/*,url:http://joyofsox.blogspot.com/atom.xml*,url:http://rss.baseballtoaster.com/blogs/thejuice.xml*,url:http://therivals.blogspot.com/atom.xml*,url:http://triumphantredsoxfan.blogspot.com/atom.xml*,url:http://yanksfansoxfan.typepad.com/ysfs/index.rdf*} {sort:date:desc} {{languages:en}} {segments_searched_maximum:5}  {tag:SearchAPI.php-10.0.10.11-production} {exclusion_filter:weblog_domain=myrss.com,weblog_domain=simplefeed.net,weblog_domain=content-feeder.com,weblog_domain=just-4-u.org,weblog_domain=ebookkey.com} {debug:enable} {search_cache:disable}
+
+#search test{inclusion_filter:weblog_category=news}{sort:date:desc} {debug:enable} {search_cache:disable}
+#search test{inclusion_filter:weblog_lang=en}{sort:date:desc} {debug:enable} {search_cache:disable}
+#search test{inclusion_filter:weblog_category=nefws}{inclusion_filter:weblog_lang=en}{sort:date:desc} {debug:enable} {search_cache:disable}
+
+#search feed_title:aol {sort:date:desc} {debug:enable} {search_cache:disable}
+#search weblog_description:microsoft {sort:date:desc} {debug:enable} {search_cache:disable}
+
+#search {tag:fp_3_101_19} {inclusion_filter:site:yahoo.com,site:bbc.co.uk,site:reuters.com,site:nytimes.com,site:cnn.com,site:msnbc.com,site:washingtonpost.com,site:latimes.com,site:ap.org,site:npr.org} {exclusion_filter:site:answers.yahoo.com,site:auctions.yahoo.com,site:podcasts.yahoo.com,site:360.yahoo.com,site:myweb.yahoo.com,site:search.yahoo.com,site:groups.yahoo.com,site:weather.yahoo.com,site:traffic.yahoo.com,site:blog.myspace.com,site:www.example.com} {sort:date:desc} {inclusion_filter:weblog_category=blog} {{languages:en}} {segments_searched_maximum:5}  {tag:SearchAPI.php-10.0.10.11-production} {exclusion_filter:weblog_domain=myrss.com,weblog_domain=simplefeed.net,weblog_domain=content-feeder.com,weblog_domain=just-4-u.org,weblog_domain=ebookkey.com} {debug:enable} {search_cache:disable}
+
+
+#search ?!#* {sort:date:desc} {debug:enable} {search_cache:disable}
+#search *foo {sort:date:desc} {debug:enable} {search_cache:disable}
+
+
+#search aol {sort:date:desc} {debug:enable} {search_cache:disable}
+#search microsoft {sort:date:desc} {debug:enable} {search_cache:disable}
+#search com {sort:date:desc} {debug:enable} {search_cache:disable}
+
+
+#search microsoft {sort:date:desc} {exclusion_filter:aol} {debug:enable} {search_cache:disable}
+#search microsoft {sort:date:desc} {exclusion_filter:weblog_domain=myrss.com,weblog_domain=simplefeed.net,weblog_domain=content-feeder.com,weblog_domain=just-4-u.org,weblog_domain=ebookkey.com} {debug:enable} {search_cache:disable}
+#search microsoft {sort:date:desc} {exclusion_filter:aol} {exclusion_filter:weblog_domain=myrss.com,weblog_domain=simplefeed.net,weblog_domain=content-feeder.com,weblog_domain=just-4-u.org,weblog_domain=ebookkey.com} {debug:enable} {search_cache:disable}
+
+#search patents {sort:date:desc} {{languages:en}} {inclusion_filter:feed_url=http://oren.blogs.com/index.rdf}
+#search patents {sort:date:desc} {{languages:en}} {exclusion_filter:weblog_domain=myrss.com,weblog_domain=simplefeed.net,weblog_domain=content-feeder.com,weblog_domain=just-4-u.org,weblog_domain=ebookkey.com} {debug:enable} {search_cache:disable}
+#search patents {sort:date:desc} {{languages:en}} {inclusion_filter:feed_url=http://oren.blogs.com/index.rdf} {exclusion_filter:weblog_domain=myrss.com,weblog_domain=simplefeed.net,weblog_domain=content-feeder.com,weblog_domain=just-4-u.org,weblog_domain=ebookkey.com} {debug:enable} {search_cache:disable}
+
+
+#search 阿美利哥·维斯普西  {sort:date:desc} {debug:enable} {search_cache:disable}
+#search 一億円 1億円 二億円 ２億円 二十億円　20億円 2000円札 ２０００円札 2千円札 二千円札 2000 {sort:date:desc} {debug:enable} {search_cache:disable}
+#search ｡｢｣､ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝﾞﾟ {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search Feedster {languages:en} NOT weblog_domain=myrss.com {sort:date:desc} {debug:enable} {search_cache:disable}
+
+
+
+#search finance@nifty lang=en {search_cache:disable} {sort:date:desc} {debug:enable}
+#search literal[finance@nifty]  lang=en {search_cache:disable} {sort:date:desc} {debug:enable}
+
+
+#search rogerg@gci.net {sort:date:desc} {language:en} {search_timeout:4000} {segments_searched_maximum:5} {debug:enable} {tag:SearchAPI.php-64.95.116.8} NOT weblog_domain = myrss.com {search_cache:disable}
+#search rogerg@gci.net {sort:date:desc} {languages:en} {search_timeout:4000} {segments_searched_maximum:5} {debug:enable} {tag:SearchAPI.php-64.95.116.8} NOT weblog_domain=myrss.com {search_cache:disable}
+#search invasive species {sort:relevance:desc} {languages:en} {search_timeout:4000} {segments_searched_maximum:5} {debug:enable} {tag:SearchAPI.php-64.95.116.8} NOT weblog_domain = myrss.com {search_cache:disable}
+#search invasive species {sort:relevance:desc} {languages:en} {search_timeout:4000} {segments_searched_maximum:5} {debug:enable} {tag:SearchAPI.php-64.95.116.8} {search_cache:disable}
+
+#search "cool ass shit" {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search blogs {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search feedster {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search do you write poetry or lyrics? {search_cache:disable} {sort:date:desc} {debug:enable}
+#search "running out of pain" {search_cache:disable} {sort:date:desc} {debug:enable}
+
+#search apple mac {search_cache:disable} {boolean_operation:relaxed} {debug:enable} {boolean_operator:or}
+#search (apple mac) +language:jp {search_cache:disable} {boolean_operation:relaxed} {debug:enable} {boolean_operator:or}
+#search (apple mac) AND language:jp {search_cache:disable} {boolean_operation:relaxed} {debug:enable} {boolean_operator:or}
+#search apple mac +language:jp {search_cache:disable} {boolean_operation:strict} {debug:enable} {boolean_operator:or}
+#search Schiettecatte language:fr {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search テレビ language=fr {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search Schiettecatte {boolean_operation:strict} {debug:enable}
+#search Schiettecatte {exclusion_filter:aol} {boolean_operation:strict} {debug:enable}
+
+#search Schiettecatte {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#searchList Schiettecatte {exclusion_filter:aol} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search Schiettecatte {exclusion_filter:lions} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search Schiettecatte {exclusion_filter:lions,coral} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+
+#search blogs {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search blogs {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search atomix mp3 com {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search game cheat com {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search / {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search schiettecatte date=today {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search schiettecatte loadtime=20000 {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=today {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=yesterday {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=this-week {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=last-week {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=this-month {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=last-month {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=this-year {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=last-year {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search titre:lions {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search "lions animals" {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=monday {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=tuesday {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=wednesday {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=thursday {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=friday {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=saturday {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=sunday {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=foobar {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search date=this-week {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search feedster date=aujourd'hui {segments_searched_maximum:3} {debug:enable} 
+#search プレステ {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search プレステプレステ {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search title="プレステ" {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search title=(プレステ) {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search プレ adj ステ {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search "起業" {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search 起業 {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search literal[起業] {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search [起業] {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search ”スマップ” {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search スマップ {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search literal[スマップ] {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search "大手町" {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search 大手町 {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search コンピュータ {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search 變える {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search 國 {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search title=(human computer interaction) {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search title="human computer interaction" {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+
+#AddPositiveFeedbackText benefits of 64-bit computing in the enterprise
+#search human computer interaction {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search animals {sort:relevance:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search schiettecatte {sort:relevance:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search about {sort:relevance:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+closeIndex
+shutdownServer
+
+exit
+
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language ja
+openIndex posts-0014, posts-0015
+
+searchOffsets 0 9
+searchReport formatted
+
+#search human computer interaction {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search 杉田かおる {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search 読売ジャイアン {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search 天候は今回非常に素晴らしくない年の {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+
+#search weblog_language=en Interpersonal relations / Research (weblog_domain=cnn.com or weblog_domain=reuters.com or weblog_domain=nytimes.com or weblog_domain=usatoday.com or weblog_domain=washingtonpost.com or weblog_domain=cbsnews.com or weblog_domain=abcnews.go.com or weblog_domain=npr.org) {date>20051001} {sort:relevance:desc} {debug:enable} {tag:/home/feedster.com/htdocs/search.php-64.95.116.10
+#search Interpersonal relations / Research (weblog_domain=cnn.com or weblog_domain=reuters.com or weblog_domain=nytimes.com or weblog_domain=usatoday.com or weblog_domain=washingtonpost.com or weblog_domain=cbsnews.com or weblog_domain=abcnews.go.com or weblog_domain=npr.org) weblog_language=en 
+
+#search Francois Schiettecatte  {date=2000} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search Francois Schiettecatte  {date>2000:01:01:10:10:10} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search Francois Schiettecatte  {date>2000/01/01-10:10:10} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search Francois Schiettecatte {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search francois@fsconsult.com {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search 抽插 {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search 幸村誠 {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search 。。幸村誠。抽插。。 {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search ｡｢｣､ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝﾞﾟ {sort:date:desc} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search feed_terms=(real estate) {sort:relevance:desc}
+
+#AddPositiveFeedbackText radio station 
+#search schiettecatte +francois {sort:date:desc} {search_cache:disable} {debug:enable}
+
+
+closeIndex
+shutdownServer
+
+exit
+
+
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language en
+openIndex ads
+
+searchOffsets 0 9
+searchReport formatted
+
+AddPositiveFeedbackText radio station HD hd feedster clay signal engine satellite atlanta search see technorati FM fm result seattle he link watt into stathako name longhorn dinner pickup here air well interesting impressive window CEO marcucci geek ceo existing reporting entercom portland multicasting rafer you're torrone vista over potential channel engineer cruddy icerocket retrofit we'll digital winer listen tour content choice AM cost detail technology pilgrimage gave kenwood power local article them along complimentary distortion tonight
+#AddPositiveFeedbackText Does this mean anything anymore? Can we ever do business as usual again? How exactly do you do business with insane gas prices, impossible airline costs also due to gas, with the potential perils of terrorism and the most frightening terrorist of all bearing down on you -- Mother Nature
+
+searchList {search_cache:disable} {boolean_operation:strict} {debug:enable} {feedback_maximum_term_percentage:100}
+
+
+closeIndex
+shutdownServer
+
+exit
+
+
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language en
+openIndex posts
+
+searchOffsets 0 9
+searchReport formatted
+
+#AddPositiveFeedbackText benefits of 64-bit computing in the enterprise
+search human computer interaction {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search ms. foobar {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search "ms. foobar" {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search foobar* {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search soundex[foobar] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search soundex[foobar.] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search soundex {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search 杉田かおる {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search 杉田 かおる {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search 杉田かおる* 杉田かおるfoo {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search 杉田 かおる* {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search title=computer {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search title=(human computer interaction) {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search title=杉田 and title=かおる {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search title=杉田かおる {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search title=(杉田かおる) {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search title="human computer" {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search title="杉田かおる" {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search "杉田かおる" {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search "杉田 かおる" {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search literal[杉田かおる] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search literal[foobar] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search thesaurus[foobar] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+
+#searchList animals {search_cache:disable} {debug:enable}
+#searchList animals {sort:rank:desc} {search_cache:disable} {debug:enable}
+#searchList animals {sort:date:desc} {search_cache:disable} {debug:enable}
+
+#search francois schiettecatte {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search ? {sort:date:desc}{debug:enable} {tag:/home/feedster.com/htdocs/search.php-64.95.116.10} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search francois * {sort:date:desc}{debug:enable} {tag:/home/feedster.com/htdocs/search.php-64.95.116.10} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search re:? {sort:date:desc}{debug:enable} {tag:/home/feedster.com/htdocs/search.php-64.95.116.10} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search weblog_domain=*25.jpg *25.jpg {sort:date:desc}{debug:enable} {tag:/home/feedster.com/htdocs/search.php-64.95.116.10} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search 猫　写真 {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search foobar {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search the {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search the jumping frenchmen syndrome {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search the jumping frenchmen syndrome {term_case:keep} {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+
+closeIndex
+shutdownServer
+
+exit
+
+
+
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language en
+searchOffsets 0 9
+searchReport formatted
+
+openIndex posts
+
+
+search human computer interaction {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search ms. foobar {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search "ms. foobar" {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search foobar* {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search soundex[foobar] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search soundex[foobar.] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search soundex {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search 杉田かおる {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search 杉田 かおる {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search 杉田かおる* 杉田かおるfoo {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search 杉田 かおる* {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search title=computer {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search title=(human computer interaction) {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search title=杉田 and title=かおる {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search title=杉田かおる {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search title="human computer" {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search title="杉田かおる" {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search "杉田かおる" {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search "杉田 かおる" {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search literal[杉田かおる] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search literal[foobar] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+search thesaurus[foobar] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+
+closeIndex
+shutdownServer
+
+exit
+
+
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language en
+searchOffsets 0 9
+searchReport formatted
+
+openIndex ads
+
+
+#addPositiveFeedbackText I'm gonna take off the rest of the weekend. My experiment in sleep deprivation is over. In the meantime, check out Memeorandum. Oh, and I noticed a few people misunderstood when I said it had a whitelist. It does. But it also has machine learning. So, when a group of tech bloggers link to someone new it adds them to the list too. I notice that the quality (and depth) of the links is already improving. What do you think of Memeorandum? Gabe Rivera, the guy who built Memeorandum says that tech bloggers are too quiet on the weekends but that the political bloggers keep linking all weekend long.
+#addPositiveFeedbackText benefits of 64-bit computing in the enterprise
+addPositiveFeedbackText Brad Feld, venture capitalist: 2006 Will Be The Year of Microsoft.
+#addPositiveFeedbackText Lots of people are asking me what I think of the two very negative articles about Microsoft (that link goes to Memeorandum where you can see some of the early discussion) that were published this week. First, I like Mini-Microsoft. Why? Cause I want to work for a company that constantly is looking at itself to see how it can improve and Mini-Microsoft certainly gives employees a way to surface problems and get attention on those issues. Some might argue about whether or not hanging our dirty laundry in public is a good thing, but to me it is. I'd far prefer dealing with the negative feelings that brings around than dealing with a Worldcom or an Enron (or a bankruptcy like two airlines are going through this week). How do we avoid the innovator's dilemma? By always looking at ourselves and asking ourselves "are we doing the best job we can?" and "are we doing the right things?" and "are we serving customers the best we can?" One thing I've learned as I've traveled around Microsoft with my camcorder is that software is just the realization of human ideas. I will always defend those who discuss and generate ideas. Even if they are unpopular. Mini-Microsoft often infuriates me. He often makes me cheer, too. But, that's why I love him. He gets me to think. He gets me to question what I'm doing. Where I'm going. And the same about Microsoft. Anyway, I thought about getting "rah rah" but now is not the time. We had a great week here at the PDC. Now we have to get back to work cause we have long lists of things that customers want us to do. I guess I didn't answer the question that was raised about these articles. Am I proud to work here at Microsoft? Yes. Is my morale high? Yes although there are definitely issues I'm working with management on that I'm hearing from around the company. The way we compensate people, for instance, is just not optimal. Is Microsoft becoming less relevant? I'll let our customers answer that one. Is Microsoft a fun place to work? Absolutely. There's no other company that's doing the depth of work that we are from the Xbox to SQL Server. It's damn interesting work as you'll see in the videos I've put up this week. Does Microsoft have morale problems? Yes, but not unsolvable ones and it varies from team-to-team. Guess what? All companies have morale problems. By the way, our recruiting team has three former Google employees on it (I had dinner with them the other night). But no one ever talks about the employees who leave Google to come to work for Microsoft. This year alone I've turned down other jobs for more money (lots more money, actually). Why did I do that? Well, I work with the folks who do stuff like this. Why do I stay at Microsoft? Because I get to see the whole of Microsoft. I get to see it in a way that not even Gates or Ballmer do. My coworkers continually amaze me. Now back to work.
+#addPositiveFeedbackText I've been writing fiction lately -- in particular finishing up a short story that's got some oblique sex scenes in it -- I don't show you the whole thing -- just the door to the bedroom cracked open, certain body parts, not the ones you might expect. A woman's foot arched with pleasure, getting caught up in the sheets. I love writing stories. I love telling stories. Tell me a story. Tell me a bedtime story.
+
+
+
+searchList {debug:enable} {search_cache:disable}
+
+
+closeIndex
+shutdownServer
+
+exit
+
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language en
+openIndex test
+
+searchOffsets 0 9
+searchReport formatted
+
+
+#search Fran* {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search Franç* {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search Franc* {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search fran* {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search franç* {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search franc* {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search 话对* {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search Çsect* {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search çsect* {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search soundex[test] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search soundex[Test] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search soundex[Françoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search soundex[Francoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search soundex[françoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search soundex[francoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search soundex[Çsection] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search soundex[çsection] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search phonix[test] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search phonix[Test] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search phonix[Françoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search phonix[Francoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search phonix[françoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search phonix[francoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search phonix[Çsection] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search phonix[çsection] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search metaphone[test] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search metaphone[Test] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search metaphone[Françoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search metaphone[Francoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search metaphone[françoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search metaphone[francoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search metaphone[Çsection] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search metaphone[çsection] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search typo[tset] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search typo[twst] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search typo[Tset] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search typo[Franoçise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search typo[Franocise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search typo[franoçise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search typo[franoçise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search typo[Çsetcion] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search typo[çsetcion] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search typo[话对以后您] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search typo[话对以您后] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search regex[test] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search regex[Test] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search regex[Françoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search regex[Francoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search regex[françoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search regex[francoise] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search regex[Çsection] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search regex[çsection] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search range[100-200] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search range[a-c] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search range[f-u] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search range[A-C] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search range[F-U] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search range[À-È] {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search >À {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search test {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+#search user interface design {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search Automated Target Recognition {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search <animals> {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search title=yahoo iktomi {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search title=(yahoo google) iktomi {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search title=(yahoo google) Yahoo! <animals> iktomi {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search title=(yahoo google) <animals> iktomi {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search !yahoo {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search yahoo! {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search title=yahoo! {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search title>=(yahoo! weblog) {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+closeIndex
+shutdownServer
+
+exit
+
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language en
+openIndex hci-bib
+
+searchOffsets 0 9
+searchReport formatted
+
+
+#addPositiveFeedbackText Paraquat is a pneumotoxicant that produces toxicity by redox cycling with cellular diaphorases, thereby elevating intracellular levels of superoxide. NO synthase participates in paraquat-induced lung injury. It had been theorized that NO reacts with superoxide generated by paraquat to produce the toxin peroxynitrite. Day et al. (1999) asked whether NOS might alternatively function as a paraquat diaphorase and reexamined the question of whether NO/superoxide reactions are toxic or protective. They showed that neuronal NOS had paraquat diaphorase activity that inversely correlates with NO formation; that paraquat-induced endothelial cell toxicity is attenuated by inhibitors of NOS that prevent NADPH oxidation, but is not attenuated by those that do not; that paraquat inhibits endothelium-derived, but not NO-induced, relaxations of aortic rings; and that paraquat-induced cytotoxicity is potentiated in cytokine-activated macrophages in a manner that correlates with its ability to block NO formation. These data indicated that NOS is a paraquat diaphorase and that toxicity of such redox-active compounds involves the loss of NO-related activity. 
+#addPositiveFeedbackText Many people are concerned about the effects of the computerization.  Here one of the worries will be attended to dealing with the effect of computers on people who work with computers: are the computer experts getting like machines by their intercourse with computers?  Two studies are presented, aiming at analyzing eventual differences in thinking between people who are interested in computers and people who are not familiar with computers.  In the first study, mathematical and logical tasks were used, where a positive transfer effect from computer interest was expected.  In the second study, creative and verbal tasks were added, in order to study the eventual negative effect of computer interest.  Students in computer science were compared to students in psychology.  In the first study it was found that computer science students used logic and formal reasoning to greater extent than psychology students did. In the second study psychology students excelled in practical creativity. 
+#addPositiveFeedbackText The development of Automated Target Recognition (ATR) systems has been the focus of considerable interest and funding during the past decade.  Such systems were originally envisioned as being almost completely autonomous and capable of detecting, locating, and classifying targets and of assigning weapons to targets with little or no human intervention. Such completely autonomous performance remains well beyond current ATR capabilities, however.  Under the performance levels currently achievable for ATR systems, the human operator plays an essential role in screening ATR detections and rejecting false alarms.  Operators must rapidly review the ATR's judgments, and their accuracy in confirming or rejecting those judgments is a critical determinant of the overall effectiveness of the human-machine system.  The integration of human and machine visual capabilities is a key factor in effective system design
+
+#addPositiveFeedbackText Human Error and Human Reliability
+addPositiveFeedbackText Computer Anxiety and the Older Adult
+#addPositiveFeedbackText animals
+
+
+searchList {debug:enable} {search_cache:disable}
+#searchList human {debug:enable} {search_cache:disable}
+
+
+#search soundex[lions] {sort:date:desc} {debug:enable} {search_cache:disable}
+#search range[100-200] {debug:enable} {search_cache:disable}
+#search range[lamp-mexico] {debug:enable} {search_cache:disable}
+#search range[mexico-milky] {debug:enable} {search_cache:disable}
+#search title>=lion {sort:date:desc} {debug:enable} {search_cache:disable}
+
+#search animals {debug:enable} {search_cache:disable}
+#search an* {debug:enable} {search_cache:disable}
+#search An* {debug:enable} {search_cache:disable}
+
+#search headline=range[bag-bull] {debug:enable} {search_cache:disable}
+#search headline=range[10-20] {debug:enable} {search_cache:disable}
+#search author=calishain author>tar author<tarz  {search_cache:disable} {debug:enable} {search_cache:disable}
+
+#search animals {sort:date:desc} {debug:enable} {search_cache:disable}
+#search animals[5] {sort:date:desc} {debug:enable} {search_cache:disable}
+#search soundex[animals[5]] {sort:date:desc} {debug:enable} {search_cache:disable}
+#search regex[lio[a-z]s] {sort:date:desc} {debug:enable} {search_cache:disable}
+#search regex[lio[a-z]] {sort:date:desc} {debug:enable} {search_cache:disable}
+#search title=regex[lio[a-z]s] {sort:date:desc} {debug:enable} {search_cache:disable}
+
+#search literal[anima[a-z]s] {sort:date:desc} {debug:enable} {search_cache:disable}
+#search title=literal[anima[a-z]s] {sort:date:desc} {debug:enable} {search_cache:disable}
+
+#search soundex[lions] {sort:date:desc} {debug:enable} {search_cache:disable}
+#search soundex[tomorrow?] {sort:date:desc} {debug:enable} {search_cache:disable}
+#search literal[tomorrow?] {sort:date:desc} {debug:enable} {search_cache:disable}
+#search literal[who am I?] {sort:date:desc} {debug:enable} {search_cache:disable}
+#search literal[<pre>] {sort:date:desc} {debug:enable} {search_cache:disable}
+#search animal* {sort:date:desc} {debug:enable} {search_cache:disable}
+#search animals {sort:date:desc} {debug:enable} {search_cache:disable}
+
+#search title:lion {sort:date:desc} {debug:enable}
+#search soundex[animal] {sort:date:desc} {debug:enable}
+#search The Dynamic Duo of PEAR:<img src="/b2-img/smilies/icon_biggrin.gif" />B and Smarty {sort:date:desc} {debug:enable}
+#search *imal {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search <animals> {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search title=yahoo iktomi {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search title=(yahoo google) iktomi {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search title=(yahoo google) Yahoo! <animals> iktomi {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search title=(yahoo google) <animals> iktomi {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search !yahoo {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search yahoo! {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search title=yahoo! {search_cache:disable} {boolean_operation:strict} {debug:enable}
+#search title>=(yahoo! weblog) {search_cache:disable} {boolean_operation:strict} {debug:enable}
+
+closeIndex
+shutdownServer
+
+exit
+
+
+
+
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language en
+openIndex posts
+
+searchOffsets 0 29
+searchReport formatted
+
+#getIndexInfo
+
+
+#addPositiveFeedbackText Paraquat is a pneumotoxicant that produces toxicity by redox cycling with cellular diaphorases, thereby elevating intracellular levels of superoxide. NO synthase participates in paraquat-induced lung injury. It had been theorized that NO reacts with superoxide generated by paraquat to produce the toxin peroxynitrite. Day et al. (1999) asked whether NOS might alternatively function as a paraquat diaphorase and reexamined the question of whether NO/superoxide reactions are toxic or protective. They showed that neuronal NOS had paraquat diaphorase activity that inversely correlates with NO formation; that paraquat-induced endothelial cell toxicity is attenuated by inhibitors of NOS that prevent NADPH oxidation, but is not attenuated by those that do not; that paraquat inhibits endothelium-derived, but not NO-induced, relaxations of aortic rings; and that paraquat-induced cytotoxicity is potentiated in cytokine-activated macrophages in a manner that correlates with its ability to block NO formation. These data indicated that NOS is a paraquat diaphorase and that toxicity of such redox-active compounds involves the loss of NO-related activity. 
+#addPositiveFeedbackText Many people are concerned about the effects of the computerization.  Here one of the worries will be attended to dealing with the effect of computers on people who work with computers: are the computer experts getting like machines by their intercourse with computers?  Two studies are presented, aiming at analyzing eventual differences in thinking between people who are interested in computers and people who are not familiar with computers.  In the first study, mathematical and logical tasks were used, where a positive transfer effect from computer interest was expected.  In the second study, creative and verbal tasks were added, in order to study the eventual negative effect of computer interest.  Students in computer science were compared to students in psychology.  In the first study it was found that computer science students used logic and formal reasoning to greater extent than psychology students did. In the second study psychology students excelled in practical creativity. 
+#addPositiveFeedbackText The development of Automated Target Recognition (ATR) systems has been the focus of considerable interest and funding during the past decade.  Such systems were originally envisioned as being almost completely autonomous and capable of detecting, locating, and classifying targets and of assigning weapons to targets with little or no human intervention. Such completely autonomous performance remains well beyond current ATR capabilities, however.  Under the performance levels currently achievable for ATR systems, the human operator plays an essential role in screening ATR detections and rejecting false alarms.  Operators must rapidly review the ATR's judgments, and their accuracy in confirming or rejecting those judgments is a critical determinant of the overall effectiveness of the human-machine system.  The integration of human and machine visual capabilities is a key factor in effective system design
+#addPositiveFeedbackText Increasing link popularity means more than trying to improve Google PageRank. Jill Whalen explains linking strategies, clarifies reciprocal linking, and discusses link quality.
+#addPositiveFeedbackText Random thoughts during this crazyy week.
+#addPositiveFeedbackText Search Engine Spider, Index, And Ranking
+#addPositiveFeedbackText Search Engine Optimization SEO
+#addPositiveFeedbackText Hello and Welcome To TE 123
+
+searchList {search_cache:disable} {debug:enable} {early_completion:disable}
+#searchList Google PageRank {search_cache:disable} {debug:enable} {early_completion:disable}
+#searchList information retrieval {search_cache:disable} {debug:enable} {early_completion:disable}
+
+
+#search Francois {sort:date:desc} {search_cache:disable} {debug:enable} {term_case:keep}
+#search Francois {sort:date:desc} {search_cache:disable} {debug:enable} {term_case:drop}
+#search francois {sort:date:desc} {search_cache:disable} {debug:enable}
+
+#search schiettecatte {sort:date:desc} {search_cache:disable} {debug:enable}
+#search Feedster {sort:date:desc} {search_cache:disable} {debug:enable}
+#search bush {sort:relevance:desc} {search_cache:disable} {debug:enable}
+#search kerry {sort:relevance:asc} {search_cache:disable} {debug:enable}
+
+#search weblogs {sort:date:desc} {search_cache:disable} {debug:enable}
+#search blogs {sort:date:asc} {search_cache:disable} {debug:enable}
+#search bush {sort:relevance:desc} {search_cache:disable} {debug:enable}
+#search kerry {sort:relevance:asc} {search_cache:disable} {debug:enable}
+#search schiettecatte {sort:date:desc} {search_cache:disable} {debug:enable}
+#search schiettecatte {sort:date:asc} {search_cache:disable} {debug:enable}
+#search schiettecatte {sort:relevance:desc} {search_cache:disable} {debug:enable}
+#search schiettecatte {sort:relevance:asc} {search_cache:disable} {debug:enable}
+#search range[milktoast-milky] {debug:enable} {search_cache:disable}
+#search weblog_url=http://www.have-at-it.net/* {sort:date:desc} {search_cache:disable} {debug:enable}
+#search permalink=http://www.have-at-it.net/2004/12/22.html#a660 {sort:date:desc} {search_cache:disable} {debug:enable}
+
+closeIndex
+shutdownServer
+
+exit
+
+
+
+
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language en
+
+openIndex lwps://10.0.1.225:9001/jfif
+
+searchReport raw
+searchOffsets 0 9
+
+searchList animals {search_cache:disable}
+
+#search Where Who What feedster {search_cache:disable}
+#search where {search_cache:disable}
+#search Where {search_cache:disable}
+#search 1 {search_cache:disable}
+#search title=1 {search_cache:disable}
+#search text=where {search_cache:disable}
+#search text=Where {search_cache:disable}
+#search title=where {search_cache:disable}
+#search title=Where {search_cache:disable}
+#search title=feedster {search_cache:disable}
+#search title=Feedster {search_cache:disable}
+#search feedster {search_cache:disable}
+#search feedster and title=2 {search_cache:disable}
+
+closeIndex
+shutdownServer
+
+exit
+
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language en
+
+openIndex jfif
+#openIndex lwps://localhost:9000/jfif
+
+searchReport formatted
+searchOffsets 0 9
+
+#search animals
+#search \"animals\"
+#search \'animals\'
+#search "animals
+#search (animals
+#search =yahoo
+#search =yahoo!
+#search yahoo!
+#search !yahoo
+#search yahoo! news
+#search yahoo! (news test!)
+#search yahoo! {debug:enable}
+#search title = lions
+#search title=(foo fee)
+#search title=lions
+#search animals {sort:date:desc}
+
+#search soundex   [bar]
+#search foo   [bar]
+#search foo   [bar
+#search foo   [
+#search foo[
+
+#search walla! communication {sort:date:desc} {debug:enable}
+#search title = lions
+#search title=lions
+#search title=(foo fee)
+#search =yahoo! {debug:enable}
+#search yahoo! {debug:enable}
+#search !yahoo {debug:enable}
+#search yahoo! news {debug:enable}
+#search yahoo!news {debug:enable}
+#search yahoo! (news test!) {debug:enable}
+#search yahoo!
+
+#search \"animals\"
+#search \'animals\'
+#search "animals
+#search !yahoo
+#search title=lions
+#search yahoo!news {debug:enable}
+
+#searchList c++
+#searchList c#
+
+search animals
+
+closeIndex
+shutdownServer
+
+exit
+
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language en
+searchOffsets 0 9
+searchReport none
+
+openIndex posts-2004-1
+
+#search feedster {sort:date:desc}
+#search feedster
+
+#search blog {sort:date:desc}
+#search blog
+
+#search weblog {sort:date:desc}
+#search weblog
+
+#search jobs {sort:date:desc}
+#search jobs
+
+#search blog AND jobs {sort:date:desc}
+#search blog AND jobs
+
+#search Microsoft OR Bush OR Kerry {sort:date:desc}
+#search Microsoft OR Bush OR Kerry
+
+closeIndex
+shutdownServer
+
+exit
+
+
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language en
+searchOffsets 0 9
+searchReport none
+
+#openIndex posts-2004-1
+openIndex lwps://localhost:9000/posts-2004-1
+
+search The Markets Are Conversations infrastructure is becoming ever more explicit. At Feedster, we're seeing increased customer service and other enterprise use of our lightweight web services. ScottJ has been building lightweight interfaces for a couple members of the Mozilla team for a while. Loosely speaking, if you find a Firefox or Thunderbird (or, obviously, Feedster) bug, all you need to do is blog it. The developers find out about it almost immediately, even though you didn't direct the customer support request at them directly. A great example ("Staying Close to Customers") cropped up in the Smalltalk world yesterday. It started me thinking about the kinds of CRM applications that will dominate in an increasingly open-source world. Right now, a few people are already monitoring the RSSosphere for customer service issues, but in a primitive, labor-intensive fashion. When ScottJ, Derrick, or I find a posting about a Feedster bug, we manually enter it into our bug reporting system and attach a priority to it. [Ed. note: Yes, sometimes it takes a while for us to fix them.] The next-generation CRM applications will continually harvest user feedback from the network. Through Matt McAlister's efforts, IDG/InfoWorld is offering product purchase information syndicated out of Feedster to complement their own product review information. The post-sales implications are even more economically interesting. It won't take a lot of effort to add a module to Bugzilla or other packages to automatically scour the 'Net for customer feedback, taking a pretty good guess as to whether the comment should be routed to customer service, product marketing, public relations, and/or inside sales. Certain customers, like John Udell's CxO Bloggers will be able to launch multi-vendor dialogs on a semi-automated basis. Most importantly, open-source projects will be able to create extremely efficient, scalable, and cheap mechanisms by which the expertise in their user and developer communities is matched to users with problems and suggestions. Those economics will be very tough to beat. The Markets Are Conversations infrastructure is becoming ever more explicit. At Feedster, we're seeing increased customer service and other enterprise use of our lightweight web services. ScottJ has been building lightweight interfaces for a couple members of the Mozilla team for a while. Loosely speaking, if you find a Firefox or Thunderbird (or, obviously, Feedster) bug, all you need to do is blog it. The developers find out about it almost immediately, even though you didn't direct the customer support request at them directly. A great example ("Staying Close to Customers") cropped up in the Smalltalk world yesterday. It started me thinking about the kinds of CRM applications that will dominate in an increasingly open-source world. Right now, a few people are already monitoring the RSSosphere for customer service issues, but in a primitive, labor-intensive fashion. When ScottJ, Derrick, or I find a posting about a Feedster bug, we manually enter it into our bug reporting system and attach a priority to it. [Ed. note: Yes, sometimes it takes a while for us to fix them.] The next-generation CRM applications will continually harvest user feedback from the network. Through Matt McAlister's efforts, IDG/InfoWorld is offering product purchase information syndicated out of Feedster to complement their own product review information. The post-sales implications are even more economically interesting. It won't take a lot of effort to add a module to Bugzilla or other packages to automatically scour the 'Net for customer feedback, taking a pretty good guess as to whether the comment should be routed to customer service, product marketing, public relations, and/or inside sales. Certain customers, like John Udell's CxO Bloggers will be able to launch multi-vendor dialogs on a semi-automated basis. Most importantly, open-source projects will be able to create extremely efficient, scalable, and cheap mechanisms by which the expertise in their user and developer communities is matched to users with problems and suggestions. Those economics will be very tough to beat. The Markets Are Conversations infrastructure is becoming ever more explicit. At Feedster, we're seeing increased customer service and other enterprise use of our lightweight web services. ScottJ has been building lightweight interfaces for a couple members of the Mozilla team for a while. Loosely speaking, if you find a Firefox or Thunderbird (or, obviously, Feedster) bug, all you need to do is blog it. The developers find out about it almost immediately, even though you didn't direct the customer support request at them directly. A great example ("Staying Close to Customers") cropped up in the Smalltalk world yesterday. It started me thinking about the kinds of CRM applications that will dominate in an increasingly open-source world. Right now, a few people are already monitoring the RSSosphere for customer service issues, but in a primitive, labor-intensive fashion. When ScottJ, Derrick, or I find a posting about a Feedster bug, we manually enter it into our bug reporting system and attach a priority to it. [Ed. note: Yes, sometimes it takes a while for us to fix them.] The next-generation CRM applications will continually harvest user feedback from the network. Through Matt McAlister's efforts, IDG/InfoWorld is offering product purchase information syndicated out of Feedster to complement their own product review information. The post-sales implications are even more economically interesting. It won't take a lot of effort to add a module to Bugzilla or other packages to automatically scour the 'Net for customer feedback, taking a pretty good guess as to whether the comment should be routed to customer service, product marketing, public relations, and/or inside sales. Certain customers, like John Udell's CxO Bloggers will be able to launch multi-vendor dialogs on a semi-automated basis. Most importantly, open-source projects will be able to create extremely efficient, scalable, and cheap mechanisms by which the expertise in their user and developer communities is matched to users with problems and suggestions. Those economics will be very tough to beat. The Markets Are Conversations infrastructure is becoming ever more explicit. At Feedster, we're seeing increased customer service and other enterprise use of our lightweight web services. ScottJ has been building lightweight interfaces for a couple members of the Mozilla team for a while. Loosely speaking, if you find a Firefox or Thunderbird (or, obviously, Feedster) bug, all you need to do is blog it. The developers find out about it almost immediately, even though you didn't direct the customer support request at them directly. A great example ("Staying Close to Customers") cropped up in the Smalltalk world yesterday. It started me thinking about the kinds of CRM applications that will dominate in an increasingly open-source world. Right now, a few people are already monitoring the RSSosphere for customer service issues, but in a primitive, labor-intensive fashion. When ScottJ, Derrick, or I find a posting about a Feedster bug, we manually enter it into our bug reporting system and attach a priority to it. [Ed. note: Yes, sometimes it takes a while for us to fix them.] The next-generation CRM applications will continually harvest user feedback from the network. Through Matt McAlister's efforts, IDG/InfoWorld is offering product purchase information syndicated out of Feedster to complement their own product review information. The post-sales implications are even more economically interesting. It won't take a lot of effort to add a module to Bugzilla or other packages to automatically scour the 'Net for customer feedback, taking a pretty good guess as to whether the comment should be routed to customer service, product marketing, public relations, and/or inside sales. Certain customers, like John Udell's CxO Bloggers will be able to launch multi-vendor dialogs on a semi-automated basis. Most importantly, open-source projects will be able to create extremely efficient, scalable, and cheap mechanisms by which the expertise in their user and developer communities is matched to users with problems and suggestions. Those economics will be very tough to beat. The Markets Are Conversations infrastructure is becoming ever more explicit. At Feedster, we're seeing increased customer service and other enterprise use of our lightweight web services. ScottJ has been building lightweight interfaces for a couple members of the Mozilla team for a while. Loosely speaking, if you find a Firefox or Thunderbird (or, obviously, Feedster) bug, all you need to do is blog it. The developers find out about it almost immediately, even though you didn't direct the customer support request at them directly. A great example ("Staying Close to Customers") cropped up in the Smalltalk world yesterday. It started me thinking about the kinds of CRM applications that will dominate in an increasingly open-source world. Right now, a few people are already monitoring the RSSosphere for customer service issues, but in a primitive, labor-intensive fashion. When ScottJ, Derrick, or I find a posting about a Feedster bug, we manually enter it into our bug reporting system and attach a priority to it. [Ed. note: Yes, sometimes it takes a while for us to fix them.] The next-generation CRM applications will continually harvest user feedback from the network. Through Matt McAlister's efforts, IDG/InfoWorld is offering product purchase information syndicated out of Feedster to complement their own product review information. The post-sales implications are even more economically interesting. It won't take a lot of effort to add a module to Bugzilla or other packages to automatically scour the 'Net for customer feedback, taking a pretty good guess as to whether the comment should be routed to customer service, product marketing, public relations, and/or inside sales. Certain customers, like John Udell's CxO Bloggers will be able to launch multi-vendor dialogs on a semi-automated basis. Most importantly, open-source projects will be able to create extremely efficient, scalable, and cheap mechanisms by which the expertise in their user and developer communities is matched to users with problems and suggestions. Those economics will be very tough to beat. 
+
+closeIndex
+shutdownServer
+
+exit
+
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language en
+
+#openIndex jfif
+#openIndex jfif,lwps://localhost:9000/hci-bib
+openIndex hci-bib
+#openIndex jfif,hci-bib
+#openIndex medline
+#openIndex joint
+openIndex posts-2004-1
+
+searchReport formatted
+searchOffsets 0 9
+
+
+#searchList title=WHILES title=WHILE text=WHILES text=WHILE WHILES WHILE whiles while {term_case:keep} {debug:enable}
+#searchList aids AIDS {debug:enable}
+#searchList aids AIDS {term_case:keep} {debug:enable}
+#searchList title=US US title=us us {term_case:keep} {debug:enable}
+
+#searchList bpel4ws BPEL4WS {debug:enable}
+#searchList bpel4ws BPEL4WS {term_case:keep} {debug:enable}
+
+
+#search ignorance and love. [part ii] {sort:date:desc} {debug:enable}
+
+search weblog {sort:date:desc} {debug:enable}
+#search weblog {sort:date:asc} {debug:enable}
+search weblog {debug:enable}
+
+
+#search human computer interaction
+#addPositiveFeedbackText computer supported cooperative work
+#search human computer interaction
+
+#addPositiveFeedbackText human computer interxaction user interface design computer supported cooperative work
+#searchList olfactory bulbectomy {debug:enable}
+#search SOUNDEX[ANIMALS] {term_case:keep}
+#search human computer interaction {debug:enable}
+#search ani* AND gori* {debug:enable}
+#search soundex[animals] {debug:enable}
+#search literal[animal] {debug:enable}
+#searchList title=animals AND gorilla {debug:enable}
+#search animals {debug:enable} {term_case:keep}
+#search animals {debug:enable} {term_case:keep} {sort:relevance:desc}
+#search animals {debug:enable} {term_case:keep} {sort:relevance:asc}
+#search animals {debug:enable} {term_case:keep} {sort:date:desc} {early_completion:disable}
+#search animals {debug:enable} {term_case:keep} {sort:date:desc}
+#search animals {debug:enable} {term_case:keep} {sort:date:asc}
+#search animals {debug:enable} {term_case:keep} {nosort}
+#search title=lion {debug:enable} {term_case:keep}
+#search Health Administration on radiographists' competence and responsibility: delegation of tasks needs careful instructions {debug:enable} {term_case:keep}
+#search Health Administration
+#search author=gorilla {debug:enable}
+#retrieveDocument [1] abstract text/refer
+#retrieveDocument [2] abstract text/refer
+
+
+closeIndex
+shutdownServer
+
+exit
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language en
+
+openIndex jfif
+
+searchReport formatted
+searchOffsets 0 9
+
+search lions
+
+closeIndex
+shutdownServer
+
+exit
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language en
+
+openIndex jfif
+
+searchReport formatted
+searchOffsets 0 9
+addPositiveFeedbackText human computer interaction user interface design computer supported cooperative work
+#search foobar
+#search animals
+#search animals {date>19900000}
+search {date>19900000}
+#search date>1900
+
+closeIndex
+shutdownServer
+
+exit
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+language iso-8859-1 en
+
+openIndex joint
+#openIndex jfif
+
+#getServerInfo
+#getServerIndexInfo
+
+searchReport formatted
+searchOffsets 0 19
+#getIndexInfo
+searchList animals
+#searchList Lion
+#searchList typo[Loin]
+#searchList lion
+#searchList typo[loin]
+
+#retrieveDocument [1] abstract text/refer
+#retrieveDocument [6557] abstract text/refer
+#retrieveDocument [hci-bib&6557] abstract text/refer
+#retrieveDocument [6557] abstract text/refer
+#retrieveDocument [omim&153880] document text/plain
+#retrieveDocument [omim&189980] document text/plain
+#retrieveDocument [omim&151410] document text/plain
+
+
+closeIndex
+shutdownServer
+
+exit
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+openIndex hci-bib
+searchReport formatted
+searchOffsets 0 19
+searchList animals near[-10] Playstation
+closeIndex
+shutdownServer
+exit
+
+initializeServer /home/poplar/index /home/poplar/conf
+
+openIndex lwps://solaris:9001/hci-bib, lwps://solaris:9002/hci-bib, hci-bib
+
+searchReport formatted
+
+
+searchOffsets 0 19
+searchList animals
+#searchList animals {sort:relevance:desc}
+#searchList animals {sort:relevance:asc}
+#searchList animals {sort:date:desc}
+#searchList animals {sort:date:asc}
+#searchList animals {sort:author:desc}
+#searchList animals {sort:author:asc}
+
+#searchList animals {date>1990}
+#searchList animals {date<1990}
+
+
+closeIndex
+shutdownServer
+exit
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+
+# Open the index
+openIndex hci-bib
+
+# Set hits offset
+searchOffsets 0 9
+searchReport formatted
+
+
+search computer
+search Computer
+search COMPUTER
+search compuTer
+
+search comput*
+search Comput*
+search COMPUT*
+search compuT*
+
+
+search title=COMPUTER-CORBA
+search title=COMPUTER-Corba
+search title=COMPUTER-corba
+search title=Computer-CORBA
+search title=computer-CORBA
+search title=Computer-Corba
+search title=Computer-corba
+search title=computer-Corba
+search title=computer-corba
+
+
+search phonix[computer]
+search phonix[Computer]
+search phonix[COMPUTER]
+search phonix[compuTer]
+search metaphone[computer]
+search metaphone[Computer]
+search metaphone[COMPUTER]
+search metaphone[compuTer]
+search soundex[computer]
+search soundex[Computer]
+search soundex[COMPUTER]
+search soundex[compuTer]
+search typo[computer]
+search typo[Computer]
+search typo[COMPUTER]
+search typo[compuTer]
+search thesaurus[computer]
+search thesaurus[Computer]
+search thesaurus[COMPUTER]
+search thesaurus[compuTer]
+search literal[computer]
+search literal[Computer]
+search literal[COMPUTER]
+search literal[compuTer]
+
+
+search title=COMPUTER-CORBA
+search title=Computer-Corba
+search title<Access
+search title<ACCESS
+
+
+search title>computer
+search title>Computer
+search title>COMPUTER
+search title>compuTer
+search title>=computer
+search title>=Computer
+search title>=COMPUTER
+search title>=compuTer
+search title<computer
+search title<Computer
+search title<COMPUTER
+search title<compuTer
+search title<=computer
+search title<=Computer
+search title<=COMPUTER
+search title<=compuTer
+search title!=computer
+search title!=Computer
+search title!=COMPUTER
+search title!=compuTer
+search title=computer
+search title=Computer
+search title=COMPUTER
+search title=compuTer
+
+
+search >computer
+search >Computer
+search >COMPUTER
+search >compuTer
+search >=computer
+search >=Computer
+search >=COMPUTER
+search >=compuTer
+search <computer
+search <Computer
+search <COMPUTER
+search <compuTer
+search <=computer
+search <=Computer
+search <=COMPUTER
+search <=compuTer
+search !=computer
+search !=Computer
+search !=COMPUTER
+search !=compuTer
+search =computer
+search =Computer
+search =COMPUTER
+search =compuTer
+
+
+closeIndex
+shutdownServer
+exit
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+
+# Open the index
+openIndex jfif
+
+# Set hits offset
+searchOffsets 0 9
+searchReport formatted
+
+
+search sapphire
+search Sapphire
+search SAPPHIRE
+search sappHire
+
+search sapph*
+search Sapph*
+search SAPPH*
+search sappH*
+
+
+search headline=BAG-BULL
+search headline=BAG-Bull
+search headline=BAG-bull
+search headline=Bag-BULL
+search headline=bag-BULL
+search headline=Bag-Bull
+search headline=Bag-bull
+search headline=bag-Bull
+search headline=bag-bull
+
+search phonix[sapphire]
+search phonix[Sapphire]
+search phonix[SAPPHIRE]
+search phonix[sappHire]
+search metaphone[sapphire]
+search metaphone[Sapphire]
+search metaphone[SAPPHIRE]
+search metaphone[sappHire]
+search soundex[sapphire]
+search soundex[Sapphire]
+search soundex[SAPPHIRE]
+search soundex[sappHire]
+search typo[sapphire]
+search typo[Sapphire]
+search typo[SAPPHIRE]
+search typo[sappHire]
+search thesaurus[sapphire]
+search thesaurus[Sapphire]
+search thesaurus[SAPPHIRE]
+search thesaurus[sappHire]
+search literal[sapphire]
+search literal[Sapphire]
+search literal[SAPPHIRE]
+search literal[sappHire]
+
+search headline>sapphire
+search headline>Sapphire
+search headline>SAPPHIRE
+search headline>sappHire
+search headline>=sapphire
+search headline>=Sapphire
+search headline>=SAPPHIRE
+search headline>=sappHire
+search headline<sapphire
+search headline<Sapphire
+search headline<SAPPHIRE
+search headline<sappHire
+search headline<=sapphire
+search headline<=Sapphire
+search headline<=SAPPHIRE
+search headline<=sappHire
+search headline!=sapphire
+search headline!=Sapphire
+search headline!=SAPPHIRE
+search headline!=sappHire
+search headline=sapphire
+search headline=Sapphire
+search headline=SAPPHIRE
+search headline=sappHire
+
+search >sapphire
+search >Sapphire
+search >SAPPHIRE
+search >sappHire
+search >=sapphire
+search >=Sapphire
+search >=SAPPHIRE
+search >=sappHire
+search <sapphire
+search <Sapphire
+search <SAPPHIRE
+search <sappHire
+search <=sapphire
+search <=Sapphire
+search <=SAPPHIRE
+search <=sappHire
+search !=sapphire
+search !=Sapphire
+search !=SAPPHIRE
+search !=sappHire
+search =sapphire
+search =Sapphire
+search =SAPPHIRE
+search =sappHire
+
+
+closeIndex
+shutdownServer
+exit
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+
+# Open the index
+openIndex jfif
+
+# Set hits offset
+searchOffsets 0 9
+searchReport formatted
+
+
+search sapphire
+search Sapphire
+search SAPPHIRE
+search sapphire
+
+search sapph*
+search Sapph*
+search SAPPH*
+search sappH*
+
+
+search headline=range[BAG-BULL]
+search headline=range[BAG-Bull]
+search headline=range[BAG-bull]
+search headline=range[Bag-BULL]
+search headline=range[bag-BULL]
+search headline=range[Bag-Bull]
+search headline=range[Bag-bull]
+search headline=range[bag-Bull]
+search headline=range[bag-bull]
+
+search phonix[sapphire]
+search phonix[Sapphire]
+search phonix[SAPPHIRE]
+search phonix[sappHire]
+search metaphone[sapphire]
+search metaphone[Sapphire]
+search metaphone[SAPPHIRE]
+search metaphone[sappHire]
+search soundex[sapphire]
+search soundex[Sapphire]
+search soundex[SAPPHIRE]
+search soundex[sappHire]
+search typo[sapphire]
+search typo[Sapphire]
+search typo[SAPPHIRE]
+search typo[sappHire]
+search thesaurus[sapphire]
+search thesaurus[Sapphire]
+search thesaurus[SAPPHIRE]
+search thesaurus[sappHire]
+
+search headline>sapphire
+search headline>Sapphire
+search headline>SAPPHIRE
+search headline>sappHire
+search headline>=sapphire
+search headline>=Sapphire
+search headline>=SAPPHIRE
+search headline>=sappHire
+search headline<sapphire
+search headline<Sapphire
+search headline<SAPPHIRE
+search headline<sappHire
+search headline<=sapphire
+search headline<=Sapphire
+search headline<=SAPPHIRE
+search headline<=sappHire
+search headline!=sapphire
+search headline!=Sapphire
+search headline!=SAPPHIRE
+search headline!=sappHire
+search headline=sapphire
+search headline=Sapphire
+search headline=SAPPHIRE
+search headline=sappHire
+
+search >sapphire
+search >Sapphire
+search >SAPPHIRE
+search >sappHire
+search >=sapphire
+search >=Sapphire
+search >=SAPPHIRE
+search >=sappHire
+search <sapphire
+search <Sapphire
+search <SAPPHIRE
+search <sappHire
+search <=sapphire
+search <=Sapphire
+search <=SAPPHIRE
+search <=sappHire
+search !=sapphire
+search !=Sapphire
+search !=SAPPHIRE
+search !=sappHire
+search =sapphire
+search =Sapphire
+search =SAPPHIRE
+search =sappHire
+
+
+# Regular
+#getIndexWordInfo   regular
+
+# Stop
+#getIndexWordInfo   stop
+
+# Partial
+#getIndexWordInfo   wildcard insensitive Smith*nia*
+#getIndexWordInfo   wildcard insensitive 00*
+#getIndexWordInfo   wildcard insensitive s*
+
+# Soundex
+#getIndexWordInfo   soundex insensitive sapphire
+#getIndexWordInfo   soundex insensitive 000
+
+# Metaphone
+#getIndexWordInfo   metaphone insensitive sapphire
+#getIndexWordInfo   metaphone insensitive 000
+
+# Phonix
+#getIndexWordInfo   phonix insensitive anubis
+#getIndexWordInfo   phonix insensitive 000
+
+# Thesaurus
+#getIndexWordInfo   thesaurus insensitive anubis
+
+# Typo
+#getIndexWordInfo   typo insensitive smithsoinan
+#getIndexWordInfo   typo insensitive 000
+
+
+
+
+closeIndex
+shutdownServer
+exit
+
+
+
+
+
+initializeServer /home/poplar/index /home/poplar/conf
+
+# Open the index
+openIndex hci-bib
+
+# Set hits offset
+searchOffsets 0 9
+searchReport formatted
+
+search comput*
+search Comput*
+search COMPUT*
+
+#search computer
+#search Computer
+#search COMPUTER
+
+#search title=computers-cyberscope
+#search =Computers-Cyberscope
+#search =computers-cyberscope
+#search title=Computers-Cyberscope
+#search title=computers-cyberscope
+#search title=Cyberscope
+#search title=cyberscope
+#search title=Computer-Cyberscope
+
+#search title=soundex[computer]
+#search title>soundex[computer]
+#search title>literal[computer]
+
+
+#addPositiveFeedbackText human computer interaction user interface design computer supported cooperative work
+#search computer
+#clearPositiveFeedback
+
+
+closeIndex
+shutdownServer
+exit
+
+
+exit
+
+
+
+
+
+
+
+# Initialize the server
+initializeServer /home/poplar/index /home/poplar/conf
+
+# Open the hci-bib index
+openIndex hci-bib
+
+# Set hits offset
+searchOffsets 0 4
+searchReport formatted
+searchList date]
+#searchList date[100]
+#searchList date=>100
+#searchList date=<100
+#searchList title=!animals
+#searchList date<100
+#searchList soundex[foo[100
+#searchList foo[100
+#searchList foo[foo]
+#searchList soundex[foo[foo]]
+#searchList title=animals
+#searchList title=([Ru(bpy3)2+])
+
+closeIndex hci-bib
+
+# We have finished with the server, so we shutdown
+shutdownServer
+
+exit
+
+
+#searchList {date>1990}
+#searchList title=([Ru(bpy3)2+])
+#searchList surgery recovery OR
+#searchList surgery recovery AND
+#searchList application of biosurfactants in industry AND title=( )
+#searchList keyword=(measurement "eye movement") AND category=(engineer medicine ) AND artlang=(EN )
+#searchList 'data warehouse'
+#searchList clerk's tale AND title=(clerk's tale)
+#searchList title='foo'
+#searchList title = "foo"
+#searchList 'Soybean cyst nematode"
+#searchList ((company OR picnic OR term)  (apple OR computers))
+#searchList soundex[march*]
+#searchList (((ti=a ADJ ti=b) AND (c ADJ d)) OR (e AND F*))
+#searchList (lowland gorilla AND adult male) OR (canopic jar)
+#searchList information retrieval systems not "wide area information servers"
+#searchList ((company picnic term) not (apple computers))
+#searchList marchionini AND croft
+#searchList foo ( marchionini croft )
+#searchList author= ( marchionini AND croft )  title =( marchionini AND croft )
+#searchList author "gary marchionini" title
+#searchList marchionini
+#searchList author=marchionini
+#searchList march*
+#searchList soundex[marchionini]
+#searchList author=soundex[marchionini]
+#searchList marchionini near[10] croft
+#searchList marchionini near[+20] croft
+#searchList marchionini near[-30] croft
+#searchList Apple near Computers near Disability near Connection 
+#searchList typo[animals]
+#searchList phonix[animals]
+#searchList thesaurus[animals]
+#searchList metaphone[animals]
+#searchList soundex[animals]
+#searchList title=animals AND author=Chalmers
+#searchList animals not Muenchinger not Chalmers
+#searchList animals not ( Muenchinger OR Chalmers )
+#searchList (animals not Muenchinger) OR Chalmers
+#searchList "Apple Computer Disability Connection"
+#searchList Apple Computer Disability Connection
+#searchList Apple OR Computer OR Disability OR Connection
+
+closeIndex hci-bib
+
+# We have finished with the server, so we shutdown
+shutdownServer
+
+exit
+
+
+
+
+# Initialize the server
+initializeServer /home/poplar/index /home/poplar/conf
+
+
+# Get some server information
+getServerInfo
+getServerIndexInfo
+
+
+# Open the hci-bib index
+openIndex hci-bib
+
+
+# Get some index information
+getIndexInfo
+getIndexFieldInfo
+getIndexDocumentInfo
+getDocumentInfo [1]
+
+# Set the maximum number of documents returned to 10
+# Set hits offset
+searchOffsets 0 9
+
+# Run a search and list the results
+searchList animals
+
+# Add relevance feedback text, run a search, and clear the relevance feedback text 
+addPositiveFeedbackText human computer interaction user interface design  supported cooperative work
+search animals
+clearPositiveFeedback
+
+# Run a number of searches, but dont list the results
+search human computer interaction
+search user interface design
+search computer supported cooperative work
+search interactive software development
+search marchionini AND date>1990
+search marchionini AND date<=1990
+search (marchionini AND date<=1990) OR (marchionini)
+
+
+# Get documents
+retrieveDocument [1] abstract text/refer
+retrieveDocument [20] abstract text/refer
+retrieveDocument [31] abstract text/refer
+
+# And close the index
+closeIndex
+
+
+# Open the jfif index
+openIndex jfif
+
+# Get some index information
+getIndexInfo
+getIndexFieldInfo
+getIndexDocumentInfo
+getDocumentInfo [1]
+
+# Set hits offset
+searchOffsets 0 9
+
+# Run a search and list the results
+searchList animals
+
+# Run a search and list the results
+searchList minerals AND gems
+
+# And close the index
+closeIndex
+
+
+
+
+# Open the hci-bib & jfif searchOffsets
+openIndex hci-bib, jfif
+
+# Set hits offset
+searchOffsets 0 9
+
+# Run a search and list the results
+searchList animals
+
+# Run a number of searches, but dont list the results
+search human computer interaction
+search user interface design
+search computer supported cooperative work
+search interactive software development
+
+# And close the searchOffsets
+closeIndex
+
+
+
+# Open the hci-bib index via the lwps protocol
+# This assumes that there is an mpsserver running as a daemon
+# program on port 9000
+openIndex lwps://ultra.fsconsult.com:9000/hci-bib
+
+# Get some index information
+getIndexInfo
+getIndexFieldInfo
+getIndexDocumentInfo
+getDocumentInfo [1]
+
+# Set hits offset
+searchOffsets 0 9
+
+# Run a search and list the results
+searchList animals
+
+# Run a number of searches, but dont list the results
+search human computer interaction
+search user interface design
+search computer supported cooperative work
+search interactive software development
+search human computer interaction
+search user interface design
+search computer supported cooperative work
+search interactive software development
+
+# Get documents
+retrieveDocument [1] abstract text/refer
+retrieveDocument [20] abstract text/refer
+retrieveDocument [31] abstract text/refer
+
+# And close the searchOffsets
+closeIndex
+
+
+
+
+# Open the hci-bib & jfif index via the lwps protocol
+# This assumes that there is an mpsserver running as a daemon
+# program on port 9000
+openIndex lwps://ultra.fsconsult.com:9000/hci-bib, lwps://ultra.fsconsult.com:9000/jfif
+
+# Set hits offset
+searchOffsets 0 9
+
+# Run a search and list the results
+searchList animals
+
+# Run a number of searches, but dont list the results
+search human computer interaction
+search user interface design
+search computer supported cooperative work
+search interactive software development
+search human computer interaction
+search user interface design
+search computer supported cooperative work
+search interactive software development
+
+# And close the searchOffsets
+closeIndex
+
+
+
+# Open the hci-bib index via the lwps protocol and the jfif index locally
+# This assumes that there is an mpsserver running as a daemon
+# program on port 9000
+openIndex lwps://ultra.fsconsult.com:9000/hci-bib, jfif
+
+# Set hits offset
+searchOffsets 0 9
+
+# Run a search and list the results
+searchList animals
+
+# Run a number of searches, but dont list the results
+search human computer interaction
+search user interface design
+search computer supported cooperative work
+search interactive software development
+search human computer interaction
+search user interface design
+search computer supported cooperative work
+search interactive software development
+
+# And close the searchOffsets
+closeIndex
+
+
+
+# Open the hci-bib & jfif index via the lwps protocol and the hci-bib & jfif index locally
+# This assumes that there is an mpsserver running as a daemon
+# program on port 9000
+openIndex lwps://ultra.fsconsult.com:9000/hci-bib, lwps://ultra.fsconsult.com:9000/jfif, hci-bib, jfif
+
+# Set hits offset
+searchOffsets 0 9
+
+# Run a search and list the results
+searchList animals
+
+# Run a number of searches, but dont list the results
+search human computer interaction
+search user interface design
+search computer supported cooperative work
+search interactive software development
+search human computer interaction
+search user interface design
+search computer supported cooperative work
+search interactive software development
+
+# And close the searchOffsets
+closeIndex
+
+
+
+# Open the hci-bib index via the lwps protocol
+# This assumes that there is an mpsserver running as a daemon
+# program on port 9000
+openIndex lwps://ultra.fsconsult.com:9000/hci-bib
+
+# Get some index information
+getIndexInfo
+getIndexFieldInfo
+getIndexDocumentInfo
+getDocumentInfo [1]
+
+
+# Get some word information (all words)
+#getIndexWordInfo   1
+
+# Get some word information (stop words)
+# getIndexWordInfo 2
+
+# Get some word information (soundex words)
+#getIndexWordInfo 3 marchionini
+#getIndexWordInfo 3 marchionini author
+
+# Get some word information (metaphone words)
+#getIndexWordInfo 4 marchionini
+#getIndexWordInfo 4 marchionini author
+
+# Get some word information (phonix words)
+#getIndexWordInfo 5 marchionini
+#getIndexWordInfo 5 marchionini author
+
+# Get some word information (partial words)
+#getIndexWordInfo 7 march*
+getIndexWordInfo 7  march*  author
+
+# Get some word information (typo words)
+#getIndexWordInfo 8 marchionini 
+
+
+# And close the searchOffsets
+closeIndex
+
+
+
+
+# Open the jfif index locally
+openIndex jfif
+
+# Get some index information
+getIndexInfo
+getIndexFieldInfo
+getIndexDocumentInfo
+getDocumentInfo [1]
+
+# Get some word information (all words)
+#getIndexWordInfo   1
+
+# Get some word information (stop words)
+# getIndexWordInfo 2
+
+# Get some word information (soundex words)
+#getIndexWordInfo 3 marchionini
+#getIndexWordInfo 3 marchionini author
+
+# Get some word information (metaphone words)
+#getIndexWordInfo 4 marchionini
+#getIndexWordInfo 4 marchionini author
+
+# Get some word information (phonix words)
+#getIndexWordInfo 5 marchionini
+#getIndexWordInfo 5 marchionini author
+
+# Get some word information (partial words)
+#getIndexWordInfo 7 march*
+getIndexWordInfo 7  march*  author
+
+# Get some word information (typo words)
+#getIndexWordInfo 8 marchionini 
+
+
+
+# And close the searchOffsets
+closeIndex
+
+
+
+# Open the hci-bib index
+openIndex hci-bib
+
+# Get documents 
+retrieveDocument [1] abstract text/refer
+
+retrieveDocument [20] abstract text/refer
+
+retrieveDocument [31] abstract text/refer
+
+retrieveDocument [24] abstract text/refer
+
+retrieveDocument [26] abstract text/refer
+
+# And close the index
+closeIndex
+
+
+
+
+# Open the jfif index locally
+openIndex jfif
+
+# Run proximity searches
+search ( mother near[-40] Cohen ) {search_report:suppress}
+# Zero Hits
+search ( mother near[40] Cohen ) {search_report:suppress}
+# One Hit
+search ( mother near[+40] Cohen ) {search_report:suppress}
+# One Hit
+search ( mother near[1] infant ) {search_report:suppress}
+# One Hit
+search ( mother near[+1] infant ) {search_report:suppress}
+# One Hit
+search ( mother near[-1] infant ) {search_report:suppress}
+# Zero Hits
+
+# And close the index
+closeIndex
+
+
+# We have finished with the server, so we shutdown
+shutdownServer
+
+
+# And we exit the script
+exit
+
+
+
+
+

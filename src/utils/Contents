@@ -1,0 +1,52 @@
+#*****************************************************************************
+#       Copyright (C) 1993-2011, FS Consulting Inc. All rights reserved      *
+#                                                                            *
+#  This notice is intended as a precaution against inadvertent publication   *
+#  and does not constitute an admission or acknowledgement that publication  *
+#  has occurred or constitute a waiver of confidentiality.                   *
+#                                                                            *
+#  This software is the proprietary and confidential property                *
+#  of FS Consulting, Inc.                                                    *
+#*****************************************************************************
+
+
+Contents for ./src/utils
+------------------------
+
+This directory contains the various source code
+files which makes up the utilities library.
+
+args.c args.h
+bitmap.h
+config.c config.h
+cwrappers.c cwrappers.h
+date.c date.h
+debug.h
+dict.c dict.h
+file.c file.h
+hash.c hash.h
+load.c load.h
+log.c log.h
+macros.h
+mem.c mem.h
+net.c net.h
+num.c num.h
+posix.c posix.h
+rand.c rand.h
+repos.c repos.h
+sha1.c sha1.h
+signals.c signals.h
+socket.c socket.h
+strbuf.c strbuf.h
+strings.c strings.h
+table.c table.h
+trie.c trie.h
+types.h
+utils_err.h
+utils.h
+valid.h
+version.h
+
+repscript.c
+    - Repository scriptable application, used for 
+      testing only.
